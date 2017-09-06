@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ALALAR WEB</title>
+<script src="./js/translation.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Arvo|Audiowide|Rock+Salt' rel='stylesheet' type='text/css'>
+<link href='./css/main.css' rel='stylesheet' type='text/css'>
+
+<script>
+	var language = "EN";
+	$(window).load(function(){
+		$(".cssSplashWindow").hide();
+		setInterval(slideImages,8000);			
+	});
+	$(document).ready(function(){
+		$(".cssAboutMe > .buttondown").click(function () {
+		   $( ".cssAboutMe" ).slideUp( "slow", function () {$( ".cssAboutMe1" ).slideDown()});
+		});
+		$(".cssAboutMe1 > .buttonup").click(function () {
+		   $( ".cssAboutMe1" ).slideUp( "slow", function () {$( ".cssAboutMe" ).slideDown()});
+		});
+		$(".description > .description-text >.buttonprev").click(function () {
+		   $slide = $($(".sliderinner>ul>li")[parseInt($('input:checked').attr('id').slice(-1))-1]);
+		   $slide.find( ".description" ).fadeOut();
+		   $slide.find( ".description1" ).show().animate({left: "50%"},1000, "linear");
+		});
+		$(".description1 > .description-text > .buttonnext").click(function () {
+			$slide = $($(".sliderinner>ul>li")[parseInt($('input:checked').attr('id').slice(-1))-1]);
+		    $slide.find( ".description1" ).animate({left: "100%"},1000, "linear",function(){$slide.find( ".description1" ).hide();$slide.find( ".description" ).fadeIn()});
+		});
+		$("#hyperLang").click(function () {
+			translatePageTo(language);
+			if (language=="EN")
+				language="SP"
+			else
+				language="EN";
+		});
+	});
+	
+	function slideImages() {
+		intControl = parseInt($('input:checked').attr('id').slice(-1));
+		if ($("#control" + (intControl+1)).length > 0 )
+			intControl += 1
+		else
+			intControl = 1;
+		$("#control" + (intControl)).prop("checked",true);
+	}
+</script>
+
+</head>
+ 
+<body>
+	<div class="cssSplashWindow"></div>
+	<div class="cssTop cssTopSmall cssDivsInColumns">
+        <div class="cssName">
+			ALBERTO ALVAREZ ARBESU
+		</div>
+		<div class="cssTitle ">
+		<ul class="cssDivsInColumns cssBrilla cssIndexOptions">
+			<li><a href="./cv.html">ver mi CV</a></li>
+			<li><a href="./javademo.html">Java</a></li>
+			<li><a id="hyperLang" href="#">English</a></li>
+		</ul>
+			
+		</div>
+		<div class="cssEmail">
+			<a href="mailto:alalar@wanadoo.es">alalar@wanadoo.es</a>
+		</div>
+    </div>
+	<div class="cssAboutMe1">
+		<span class="buttonup"></span>
+	</div>
+	<div class="cssAboutMe">
+		<div class="cssImgTitle">
+			<img src="./Imagenes/foto.gif" />
+		</div>	
+		<span class="buttondown"></span>
+		<p>HOLA! BIENVENIDO A MI PAGINA</p>
+		<p>Soy programador "freelance" con mas de 10 anos de experiencia</p>
+		<p>Aqui podras ver un poco lo que hago y me gusta</p>
+		<p>Como ves en las fotos me gusta mucho viajar!!!</p>
+	</div>
+   <div class="slider"> 
+        <input type="radio" id="control1" name="controls" checked="checked"/>
+        <label for="control1"></label>
+        <input type="radio" id="control2" name="controls"/>
+        <label for="control2"></label>
+        <input type="radio" id="control3" name="controls"/>
+        <label for="control3"></label>
+        <input type="radio" id="control4" name="controls"/>
+        <label for="control4"></label>
+        <input type="radio" id="control5" name="controls"/>
+        <label for="control5"></label>
+        <div class="sliderinner">
+            <ul>
+                <li>
+                    <img src="./Imagenes/Paris.jpg" />
+                    <div class="description">
+                         <div class="description-text">
+                            <span class="buttonprev"></span><h2>Paris</h2>
+                        </div>
+                    </div>
+					<div class="description1">
+                         <div class="description-text">
+                            <span class="buttonnext"></span><h2>Paris. Esta es una foto sacada desde el Louvre</h2>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <img src="./Imagenes/Grecia.jpg" />
+                    <div class="description">
+                         <div class="description-text">
+                            <span class="buttonprev"></span><h2>Grecia</h2>
+                        </div>
+                    </div>
+					<div class="description1">
+                         <div class="description-text">
+                            <span class="buttonnext"></span><h2>Grecia. La famosa puesta de sol desde Santorini</h2>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <img src="./Imagenes/Grecia2.jpg" />
+                    <div class="description">
+ 
+                        <div class="description-text">
+                            <span class="buttonprev"></span><h2>Grecia II</h2>
+                        </div>
+                    </div>
+					<div class="description1">
+                         <div class="description-text">
+                            <span class="buttonnext"></span><h2>Grecia II. Otra foto de la magnifica Santorini</h2>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <img src="./Imagenes/Noruega.jpg" />
+                    <div class="description">
+ 
+                        <div class="description-text">
+                            <span class="buttonprev"></span><h2>Noruega</h2>
+                        </div>
+                    </div>
+					<div class="description1">
+                         <div class="description-text">
+                            <span class="buttonnext"></span><h2>Noruega. Una lengua de glaciar y era Septiembre!!</h2>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <img src="./Imagenes/Nieve.jpg" />
+                    <div class="description">
+ 
+                        <div class="description-text">
+                            <span class="buttonprev"></span><h2>Mushing</h2>
+                        </div>
+                    </div>
+					<div class="description1">
+                         <div class="description-text">
+                            <span class="buttonnext"></span><h2>Mushing. Trineo tirado con perros muy recomendable</h2>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div><!--slider-->
+</body>
+</html>

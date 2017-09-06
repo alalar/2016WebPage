@@ -1,0 +1,199 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>alalar CV</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="js/translation.js"></script>
+	<script>
+		var language = "EN";
+		$(window).load(function(){
+			$(".cssSplashWindow").hide();
+		});
+		$(document).ready(function(){
+			
+			
+			$(".csshyperLang").click(function () {
+				translatePageTo(language);
+				if (language=="EN")
+					language="SP"
+				else
+					language="EN";
+					
+				return false;
+			});
+		});
+		$(document).scroll(function () {
+			var y = $(this).scrollTop();
+			if (y > 0) {
+				$('.cssTopBig').hide();
+				$('.cssTopSmall').show();
+			} else {
+				$('.cssTopBig').show();
+				$('.cssTopSmall').hide();
+			}
+		});
+		
+	</script>
+	<link href='http://fonts.googleapis.com/css?family=Arvo|Audiowide|Rock+Salt' rel='stylesheet' type='text/css'>
+	<link href='css/main.css?1' rel='stylesheet' type='text/css'>
+</head>
+<body class="cssBody">
+	<div class="cssSplashWindow"></div>
+	
+	<div class="cssTop cssTopBig cssDivsInColumns">
+		<div class="cssName">
+			ALBERTO ALVAREZ ARBESU
+		</div>
+		<div class="cssTitle">
+			<p>Hola! soy programador "freelance" con mas de 10 a&ntilde;os de experiencia que continua aprendiendo y disfrutando de la inform&aacute;tica
+			<ul class="cssDivsInColumns cssBrilla cssCVOptions">
+				<li><a href="index.html">Inicio</a></li>
+				<li><a href="./javademo.html">Java</a></li>
+				<li><a class="csshyperLang" href="">English</a></li>
+			</ul>
+		</div>
+		<div class="cssEmail">
+				<ul>
+					<li>(0034) 971128362</li>
+					<li><a href="mailto:alalar@wanadoo.es">alalar@wanadoo.es</a></li>
+					<li><a href="http://perso.wanadoo.es/alalar">alalar webpage</a></li>
+				</ul>
+		</div>
+    </div>
+    <div class="cssTop cssTopSmall cssDivsInColumns">
+        <div class="cssName">
+			ALBERTO ALVAREZ ARBESU
+		</div>
+		<div class="cssTitle">
+			<ul class="cssDivsInColumns cssBrilla cssCVOptions">
+				<li><a href="index.html">Inicio</a></li>
+				<li><a href="./javademo.html">Java</a></li>
+				<li><a class="csshyperLang" href="">English</a></li>
+			</ul>
+		</div>
+		<div class="cssEmail">
+			<a href="mailto:alalar@wanadoo.es">alalar@wanadoo.es</a>
+		</div>
+    </div>
+	<div class="cssMainPage cssDivsInRows">
+		<div class="cssHeader cssDivsInColumns">	
+			<div class="cssImgTitle">
+				<img src="Imagenes/foto.gif" />
+			</div>
+			<div class="cssTitle cssName">
+				ALBERTO ALVAREZ ARBESU
+			</div>
+			<div class="cssMainContact">
+				<ul>
+					<li>(0034) 971128362</li>
+					<li><a href="mailto:alalar@wanadoo.es">alalar@wanadoo.es</a></li>
+					<li><a href="http://perso.wanadoo.es/alalar">alalar webpage</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="cssAbout">
+			<p>Hola! soy programador "freelance" con mas de 10 a&ntilde;os de experiencia que continua aprendiendo y disfrutando de la inform&aacute;tica
+			<p>Me encanta programar y siempre estoy dispuesto a aprender cosas nuevas
+			<p>Espero que les parezca interesante mi curriculum
+		</div>
+		<div class="cssSection cssDivsInColumns">
+			<div class="cssSectionTitle">
+				Experiencia Profesional
+			</div>
+			<div class="cssSectionInfo cssDivsInRows">
+						<div class="cssDivsInRows cssSubSection">
+							<div class="cssSubTitle">
+									<a href="http://www.stayinfront.com" target="_blank" >STAYINFRONT UK</a>
+									<I>Trabajando para ellos desde el 2005</I>
+							</div>
+							<div class="cssSubSectionInfo">
+								<p>Empresa internacional dedicada al desarrollo de aplicaciones CRM, trabajando m&aacute;s de 9 a&ntilde;os como programador freelance para su oficina de Londres
+								<p>He utilizado las siguientes tecnolog&iacute;as UML, SQL, ASP, Jquery, Javascript, .NET, HTML, CSS3
+								<p>He trabajado en desarrollos para compa&ntilde;ias internacionales como Roche, Mondelez, Arquimedes, Randox, REL, etc 
+								<p>Y trabajado para clientes en UK, Belgica, Italia, Rumania, Turquia, etc.
+							</div>
+						</div>
+						<div class="cssDivsInRows cssSubSection">
+							<div class="cssSubTitle">
+									<a href="http://innovation.es/" target="_blank" >Innovation Strategies</a>
+									<I>2013-2014</I>
+							</div>
+							<div class="cssSubSectionInfo">
+								<p>Empresa dedicada al sector turistico, trabaj&eacute; utilizando arquitectura MVC tanto en Java como en .NET
+								<p>He utilizado las siguientes tecnologias Oracle DB, Jquery, Javascript, .NET, HTML, CSS3, Java, Hibernate, Maven, WebServices
+							</div>
+						</div>
+						<div class="cssDivsInRows cssSubSection">
+							<div class="cssSubTitle">
+									Arranjaments S.A.</a>
+									<I>1999-2006</I>
+							</div>
+							<div class="cssSubSectionInfo">
+								<p>Empresa dedicada al mantenimiento inform&aacute;tico de las oficinas del Banco Sabadell. Trabaj&eacute; como responsable de la zona Norte de Espa&ntilde;a, dando soporte a +150 oficinas y gestionando un equipo de 5 personas
+								<p>He utilizado las siguientes tecnologias Delphi, UNIX, Javascript, .NET, HTML, CSS
+							</div>
+						</div>
+			</div>
+		</div>
+		<div class="cssSection cssDivsInColumns">
+			<div class="cssSectionTitle">
+				Tecnologias utilizadas
+			</div>
+			<div class="cssSectionInfo">
+				<div class="cssDivsInColumns cssSectionInfoList">
+					<div>.NET</div><div>Java</div><div>SQL</div><div>HTML</div><div>Javascript</div><div>Jquery</div><div>CSS3</div>
+					<div>Delphi</div><div>Hibernate</div><div>Maven</div><div>ASP</div><div>WebServices</div><div>MVC</div><div>Agile</div>
+					<div>JSP</div><div>PrimeFaces</div>
+				</div>
+			</div>
+		</div>	
+		<div class="cssSection cssDivsInColumns">
+			<div class="cssSectionTitle">
+				Aptitudes
+			</div>
+			<div class="cssSectionInfo cssPersonalSkills">
+				<ul>
+					<li>Experiencia en todas las partes del ciclo de un desarrollo, recogida de requisitos con el cliente, creaci&oacute;n de la especificaci&oacute;n, programaci&oacute;n del desarrollo, entrega al cliente y formaci&oacute;n a usuarios</li>
+					<li>Gran capacidad de organizaci&oacute;n y compromiso con los plazos aceptados</li>
+					<li>Excelente predisposici&oacute;n para aprender de otras personas y nuevas tecnolog&iacute;as</li>
+					<li>Buen trabajador en equipo</li>
+				</ul>
+			</div>
+		</div>		
+		
+		<div class="cssSection cssDivsInColumns">
+			<div class="cssSectionTitle">
+				Formaci&oacute;n Academica
+			</div>
+			<div class="cssSectionInfo cssEducation">
+				<ul>
+					<li>Ingeniero T&eacute;cnico Inform&aacute;tico, especialidad sistemas 1992-1996</li>
+					<li>T&eacute;cnico especialista en Sistemas Aut&oacute;matas Programables 1993-1994</li>
+					<li>T&eacute;cnico especialista en Electr&oacute;nica 1987-1992</li>
+				</ul>
+			</div>
+		</div>
+		<div class="cssSection cssDivsInColumns">
+			<div class="cssSectionTitle">
+				Idiomas
+			</div>
+			<div class="cssSectionInfo cssLanguage">
+				<ul>
+					<li>Espa&ntilde;ol (lengua materna)</li>
+					<li>Ingl&eacute;s conversaci&oacute;n (trabajando varios a&ntilde;os en diferentes proyectos internacionales)</li>
+					<li>Franc&eacute;s nivel intermedio</li>
+				</ul>
+			</div>
+		</div>	
+		<div class="cssSection cssDivsInColumns">
+			<div class="cssSectionTitle">
+				Ademas
+			</div>
+			<div class="cssSectionInfo cssMore">
+				<p>Este es un breve resumen de mi perfil profesional, no duden en ponerse en contacto si necesitan que les aclare algunos de los puntos que hay expuestos o quieren conocer algo mas sobre mi
+				<p>Un saludo
+			</div>
+		</div>		
+		
+	</div>
+</body>
+</html>

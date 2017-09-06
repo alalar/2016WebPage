@@ -1,0 +1,114 @@
+	.explain-event {
+		display:none;
+	}
+	.cssRemove {
+		position: absolute;
+		top: -1px;
+		right: -1px;
+		border-radius: 4px;
+		height:16px;
+	}
+	.cssRemove.ui-state-error {
+		border:0px;
+	}
+
+	body {
+		margin-top: 40px;
+		font-size: 14px;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		}
+	.cssMainCalendarDiv {
+		width: 95%;
+		margin: auto;
+		padding-top: 100px;
+	}
+	.cssCalendarDiv {
+		
+		width: 850px;
+		margin: 0 auto;
+		 /* flexbox setup */
+		display: -webkit-box;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: -webkit-flex;
+		display: flex;	
+
+		-webkit-box-direction: normal;
+		-moz-box-direction: normal;
+		-webkit-box-orient: horizontal;
+		-moz-box-orient: horizontal;
+		-webkit-flex-direction: row;
+		-ms-flex-direction: row;
+		flex-direction: row;		
+
+		-webkit-box-pack: center;
+		-moz-box-pack: center;
+		-webkit-justify-content: center;
+		-ms-flex-pack: center;
+		justify-content: center;
+		  
+		-webkit-box-align: start;
+		-moz-box-align: start;
+		-webkit-align-items: flex-start;
+		-ms-flex-align: start;
+		align-items: flex-start;
+		}
+		
+	#external-events {
+		width: 150px;
+		margin: 10px;
+		padding: 0 10px;
+		border: 1px solid #ccc;
+		background: #eee;
+		text-align: left;
+		min-height:50%;
+		}
+		
+	#external-events h4 {
+		font-size: 16px;
+		margin-top: 0;
+		padding-top: 1em;
+		}
+		
+	.external-event { /* try to mimick the look of a real event */
+		margin: 10px 0;
+		padding: 2px 4px;
+		background: #3366CC;
+		color: #fff;
+		font-size: .85em;
+		cursor: pointer;
+		border-radius: 5px;
+		}
+		
+	#external-events p {
+		margin: 1.5em 0;
+		font-size: 11px;
+		color: #666;
+		}
+		
+	#external-events p input {
+		margin: 0;
+		vertical-align: middle;
+		}
+
+	#calendar {
+		width: 700px;
+		border: solid 2px red;
+		border-radius: 10px;
+		padding:5px;
+		background: #EEEEFF;
+		
+		}
+	.CssWarningDay {
+		background: #FFE594 !important;
+	}		
+	.CssOkDay {
+		background: #B0FFB0 !important;
+	}
+	.CssErrorDay, tr.fc-week> .fc-past, td.fc-past  {
+		background: #FFC2C2;
+	}
+
+	tr.fc-week> .fc-sat, tr.fc-week> .fc-sun {
+		background: #FFFFFF;
+	}
