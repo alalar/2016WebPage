@@ -1,199 +1,536 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>alalar CV</title>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="js/translation.js"></script>
-	<script>
-		var language = "EN";
-		$(window).load(function(){
-			$(".cssSplashWindow").hide();
-		});
-		$(document).ready(function(){
-			
-			
-			$(".csshyperLang").click(function () {
-				translatePageTo(language);
-				if (language=="EN")
-					language="SP"
-				else
-					language="EN";
-					
-				return false;
-			});
-		});
-		$(document).scroll(function () {
-			var y = $(this).scrollTop();
-			if (y > 0) {
-				$('.cssTopBig').hide();
-				$('.cssTopSmall').show();
-			} else {
-				$('.cssTopBig').show();
-				$('.cssTopSmall').hide();
-			}
-		});
-		
-	</script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+		<script  src="https://code.jquery.com/jquery-3.2.1.min.js"  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+	<script src="./js/translation.js"></script>
+	<script src="./js/main.js"></script>
+
 	<link href='http://fonts.googleapis.com/css?family=Arvo|Audiowide|Rock+Salt' rel='stylesheet' type='text/css'>
 	<link href='css/main.css?1' rel='stylesheet' type='text/css'>
-</head>
-<body class="cssBody">
-	<div class="cssSplashWindow"></div>
+	<script>
+	</script>
 	
-	<div class="cssTop cssTopBig cssDivsInColumns">
-		<div class="cssName">
+<style>
+ body {
+	padding-top:55px;
+ }
+.workExperience {
+	background: #456990;
+	color: #fff;
+}
+.educational {
+	background: #029c6a;
+	color: #fff;
+}
+
+.timeline ul {
+	margin: 0px;
+	padding: 0px 0px 30px 0px;
+}
+
+.timeline ul li {
+  list-style-type: none;
+  position: relative;
+  width: 6px;
+  margin: 0 auto;
+  padding-top: 50px;
+  background: #fff;
+}
+ 
+.timeline ul li::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.timeline ul li > div {
+  position: relative;
+  border-radius:10px;
+  bottom: 0;
+  width: 20vw;
+  padding: 15px;
+  background: #F45B69;
+}
+
+.timeline ul li > div::before {
+  content: '';
+  position: absolute;
+  bottom: 7px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+.timeline ul li:nth-child(odd) > div {
+  left: 45px;
+}
+.timeline ul li:nth-child(odd) > div > div {
+  text-align: left;
+}
+ 
+.timeline ul li:nth-child(odd) > div::before {
+  left: -15px;
+  border-width: 8px 16px 8px 0;
+  border-color: transparent #F45B69 transparent transparent;
+}
+
+.timeline ul li:nth-child(even) > div {
+  left: calc(-18vw - 5vw);
+}
+.timeline ul li:nth-child(even) > div > div {
+  text-align: right;
+}
+ 
+.timeline ul li:nth-child(even) > div::before {
+  right: -15px;
+  border-width: 8px 0 8px 16px;
+  border-color: transparent transparent transparent #F45B69;
+}
+
+
+
+@media screen and (max-width: 1200px) {
+  .timeline ul li {
+    margin-left: 20px;
+  }
+   
+  .timeline ul li > div {
+    width: calc(100vw - 63vw);
+  }
+   
+  .timeline ul li:nth-child(even) div {
+    left: 45px;
+  }
+   
+  .timeline ul li:nth-child(even) div::before {
+    left: -15px;
+    border-width: 8px 16px 8px 0;
+    border-color: transparent #F45B69 transparent transparent;
+  }
+}
+@media screen and (max-width: 768px) {
+  .timeline ul li > div {
+    width: calc(100vw - 25vw);
+  }
+}
+ 
+.circle {
+    height: 20px;
+    width: 20px;
+    display: -webkit-inline-box;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+
+
+</style>	
+</head>
+<body class="container-fluid bg-dark">
+	<nav id="mainMenu" class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+		  <a class="navbar-brand cssBrilla" href="./index.html">
+			<img src="./Imagenes/foto.gif" class="d-inline-block align-top rounded-circle" style="width:34px;margin-top:-10px" alt="">
 			ALBERTO ALVAREZ ARBESU
-		</div>
-		<div class="cssTitle">
-			<p>Hola! soy programador "freelance" con mas de 10 a&ntilde;os de experiencia que continua aprendiendo y disfrutando de la inform&aacute;tica
-			<ul class="cssDivsInColumns cssBrilla cssCVOptions">
-				<li><a href="index.html">Inicio</a></li>
-				<li><a href="./javademo.html">Java</a></li>
-				<li><a class="csshyperLang" href="">English</a></li>
+		  </a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+			<ul class="navbar-nav w-100 justify-content-between">
+			  <li class="nav-item">
+				<a class="nav-link cssBrilla" href="./cv.html">ver mi CV</a>
+			  </li>
+			  <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle cssBrilla" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  Ejemplos Java
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				  <a class="dropdown-item " href="./javademo.html">Java</a>
+				  <div class="dropdown-divider"></div>
+				  <a class="dropdown-item" href="#">Booking apartment Angular</a>
+				</div>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link cssBrilla" id="hyperLang" href="#">English</a>
+			  </li>
+			  <li class="nav-item">
+					<a class="nav-link cssBrilla" href="mailto:alalar@wanadoo.es">alalar@wanadoo.es</a>
+				</li>
 			</ul>
-		</div>
-		<div class="cssEmail">
-				<ul>
-					<li>(0034) 971128362</li>
-					<li><a href="mailto:alalar@wanadoo.es">alalar@wanadoo.es</a></li>
-					<li><a href="http://perso.wanadoo.es/alalar">alalar webpage</a></li>
-				</ul>
-		</div>
-    </div>
-    <div class="cssTop cssTopSmall cssDivsInColumns">
-        <div class="cssName">
-			ALBERTO ALVAREZ ARBESU
-		</div>
-		<div class="cssTitle">
-			<ul class="cssDivsInColumns cssBrilla cssCVOptions">
-				<li><a href="index.html">Inicio</a></li>
-				<li><a href="./javademo.html">Java</a></li>
-				<li><a class="csshyperLang" href="">English</a></li>
-			</ul>
-		</div>
-		<div class="cssEmail">
-			<a href="mailto:alalar@wanadoo.es">alalar@wanadoo.es</a>
-		</div>
-    </div>
-	<div class="cssMainPage cssDivsInRows">
-		<div class="cssHeader cssDivsInColumns">	
-			<div class="cssImgTitle">
-				<img src="Imagenes/foto.gif" />
+		  </div>
+		</nav>
+<div class="row">
+	<div class="col-12 card text-white bg-dark ">
+		<div class="card-body row">
+			<div class="offset-sm-2 offset-md-0 col-sm-8 col-md-3 col-lg-2">
+				<img class = "rounded w-100 text-center" src="Imagenes/foto.gif" />
 			</div>
-			<div class="cssTitle cssName">
-				ALBERTO ALVAREZ ARBESU
-			</div>
-			<div class="cssMainContact">
-				<ul>
-					<li>(0034) 971128362</li>
-					<li><a href="mailto:alalar@wanadoo.es">alalar@wanadoo.es</a></li>
-					<li><a href="http://perso.wanadoo.es/alalar">alalar webpage</a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="cssAbout">
-			<p>Hola! soy programador "freelance" con mas de 10 a&ntilde;os de experiencia que continua aprendiendo y disfrutando de la inform&aacute;tica
-			<p>Me encanta programar y siempre estoy dispuesto a aprender cosas nuevas
-			<p>Espero que les parezca interesante mi curriculum
-		</div>
-		<div class="cssSection cssDivsInColumns">
-			<div class="cssSectionTitle">
-				Experiencia Profesional
-			</div>
-			<div class="cssSectionInfo cssDivsInRows">
-						<div class="cssDivsInRows cssSubSection">
-							<div class="cssSubTitle">
-									<a href="http://www.stayinfront.com" target="_blank" >STAYINFRONT UK</a>
-									<I>Trabajando para ellos desde el 2005</I>
-							</div>
-							<div class="cssSubSectionInfo">
-								<p>Empresa internacional dedicada al desarrollo de aplicaciones CRM, trabajando m&aacute;s de 9 a&ntilde;os como programador freelance para su oficina de Londres
-								<p>He utilizado las siguientes tecnolog&iacute;as UML, SQL, ASP, Jquery, Javascript, .NET, HTML, CSS3
-								<p>He trabajado en desarrollos para compa&ntilde;ias internacionales como Roche, Mondelez, Arquimedes, Randox, REL, etc 
-								<p>Y trabajado para clientes en UK, Belgica, Italia, Rumania, Turquia, etc.
-							</div>
-						</div>
-						<div class="cssDivsInRows cssSubSection">
-							<div class="cssSubTitle">
-									<a href="http://innovation.es/" target="_blank" >Innovation Strategies</a>
-									<I>2013-2014</I>
-							</div>
-							<div class="cssSubSectionInfo">
-								<p>Empresa dedicada al sector turistico, trabaj&eacute; utilizando arquitectura MVC tanto en Java como en .NET
-								<p>He utilizado las siguientes tecnologias Oracle DB, Jquery, Javascript, .NET, HTML, CSS3, Java, Hibernate, Maven, WebServices
-							</div>
-						</div>
-						<div class="cssDivsInRows cssSubSection">
-							<div class="cssSubTitle">
-									Arranjaments S.A.</a>
-									<I>1999-2006</I>
-							</div>
-							<div class="cssSubSectionInfo">
-								<p>Empresa dedicada al mantenimiento inform&aacute;tico de las oficinas del Banco Sabadell. Trabaj&eacute; como responsable de la zona Norte de Espa&ntilde;a, dando soporte a +150 oficinas y gestionando un equipo de 5 personas
-								<p>He utilizado las siguientes tecnologias Delphi, UNIX, Javascript, .NET, HTML, CSS
-							</div>
-						</div>
-			</div>
-		</div>
-		<div class="cssSection cssDivsInColumns">
-			<div class="cssSectionTitle">
-				Tecnologias utilizadas
-			</div>
-			<div class="cssSectionInfo">
-				<div class="cssDivsInColumns cssSectionInfoList">
-					<div>.NET</div><div>Java</div><div>SQL</div><div>HTML</div><div>Javascript</div><div>Jquery</div><div>CSS3</div>
-					<div>Delphi</div><div>Hibernate</div><div>Maven</div><div>ASP</div><div>WebServices</div><div>MVC</div><div>Agile</div>
-					<div>JSP</div><div>PrimeFaces</div>
+			<div class="col-12 col-md-9 col-lg-10 align-self-center">
+				<div class="row">
+					<div class="col-12 text-center">
+						<h1 class="display-3">ALBERTO ALVAREZ ARBESU</h1>
+					</div>
+					<div class="text-center col-12 cssAboutCV">
+						<h5>Hola! soy programador "freelance" con mas de 10 a&ntilde;os de experiencia que continua aprendiendo y disfrutando de la inform&aacute;tica</h5>
+						<h5>Me encanta programar y siempre estoy dispuesto a aprender cosas nuevas</h5>
+						<h5><i>Espero que les parezca interesante mi curriculum</i></h5>
+					</div>
 				</div>
 			</div>
-		</div>	
-		<div class="cssSection cssDivsInColumns">
-			<div class="cssSectionTitle">
-				Aptitudes
+			<div class="col-12 text-center cssPersonalSkills">
+				<h4>
+				<span class="badge badge-success">+10 a&ntilde;os de experiencia</span>
+				<span class="badge badge-success">Experiencia en todas las partes del ciclo de un desarrollo</span>
+				<span class="badge badge-success">Gran capacidad de organizaci&oacute;n</span>
+				<span class="badge badge-success">Compromiso con los plazos aceptados</span>
+				<span class="badge badge-success">Excelente predisposici&oacute;n para aprender de otras personas y nuevas tecnolog&iacute;as</span>
+				<span class="badge badge-success">Buen trabajador en equipo</span>
+				</h4>
+				
 			</div>
-			<div class="cssSectionInfo cssPersonalSkills">
-				<ul>
-					<li>Experiencia en todas las partes del ciclo de un desarrollo, recogida de requisitos con el cliente, creaci&oacute;n de la especificaci&oacute;n, programaci&oacute;n del desarrollo, entrega al cliente y formaci&oacute;n a usuarios</li>
-					<li>Gran capacidad de organizaci&oacute;n y compromiso con los plazos aceptados</li>
-					<li>Excelente predisposici&oacute;n para aprender de otras personas y nuevas tecnolog&iacute;as</li>
-					<li>Buen trabajador en equipo</li>
-				</ul>
+		</div>
+	</div>
+	
+	<div class="col-12 col-md-6 workExperience">
+		<h3 class="text-center">Work Experience</h3>
+		<section class="timeline">
+		  <ul>
+			<li>
+				<div>
+					<h5>
+					Stayinfront company
+					</h5>
+					<h6>Business Analyst</h6>
+					<p>Implementation of applicacion in different countries, more than 25 in Europe such as Spain, France, Nordics, Italy, etc. Creation of the interfaces to upload data info form SAP, the system has imported over 1 Million records</p>
+					<span class="badge badge-primary">HP Quality Center</span>
+					<span class="badge badge-primary">GAP analysis</span>
+					<span class="badge badge-primary">Documentation</span>
+					<span class="badge badge-primary">Meetings</span>
+					<span class="badge badge-primary">Control defects</span>
+					<span class="badge badge-primary">Interfaces</span>
+					<span class="badge badge-primary">XML</span>
+					<div>
+						2013
+					</div>
+				</div>
+			</li>
+			<li>
+				<div>
+					<h5>
+					Innovation Strategies
+					</h5>
+					<h6>Senior Developer</h6>
+					<p>Working on different projects, mainly in tourist industry</p>
+					<span class="badge badge-primary">Java</span>
+					<span class="badge badge-primary">Hibernate</span>
+					<span class="badge badge-primary">JSP</span>
+					<span class="badge badge-primary">JSF</span>
+					<span class="badge badge-primary">Angular</span>
+					<span class="badge badge-primary">SQL</span>
+					<span class="badge badge-primary">Rest</span>
+					<span class="badge badge-primary">WebServices</span>
+					<span class="badge badge-primary">Extjs</span>
+					<span class="badge badge-primary">Maven</span>
+					<span class="badge badge-primary">PrimeFaces</span>
+					<div>
+						2012
+					</div>
+				</div>
+			</li>	
+			<li>
+				<div>
+					<h5>
+					Stayinfront company
+					</h5>
+					<h6>Senior Developer</h6>
+					<p>Working in several projects doing</p>
+					<span class="badge badge-primary">.Net</span>
+					<span class="badge badge-primary">SQL</span>
+					<span class="badge badge-primary">WebServices</span>
+					<span class="badge badge-primary">HTML5</span>
+					<span class="badge badge-primary">CSS3</span>
+					<span class="badge badge-primary">Agile</span>
+					<div>
+						2005
+					</div>
+				</div>
+			</li>
+			<li>
+				<div>
+					<h5>
+					Arranjaments
+					</h5>
+					<h6>Regional Manager</h6>
+					<p>Regional manager of a company which does the maintenance of a national Spanish bank, called 'Banco Sabadell'
+						Managing a team of 5 people and taking care of 150 branches.</p>
+					<span class="badge badge-primary">.Net</span>
+					<span class="badge badge-primary">SQL</span>
+					<span class="badge badge-primary">Delphi</span>
+					<span class="badge badge-primary">HTML</span>
+					<span class="badge badge-primary">CSS</span>
+					<span class="badge badge-primary">Javascript</span>
+					<span class="badge badge-primary">UNIX</span>
+					<div>
+						1998
+					</div>
+				</div>
+			</li>
+		  </ul>
+		</section>
+	</div>
+	<div class="col-12 col-md-6 ">
+		<div class="card bg-info text-white">
+			<h5 class="card-header text-white bg-primary">
+			Skills
+			</h5>
+			<div class="card-body">
+				<dl class="row">
+					<dt class="col-4 col-sm-3 col-md-4 col-lg-3 text-right">
+						Java
+					</dt>
+					<dd class="col-8 col-sm-3 col-md-8 col-lg-3">
+						<div class="progress bg-dark">
+							<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+							90% 
+							</div>
+						</div>
+					</dd>
+					<dt class="col-4 col-sm-3 col-md-4 col-lg-3 text-right">
+						Net
+					</dt>
+					<dd class="col-8 col-sm-3 col-md-8 col-lg-3">
+						<div class="progress bg-dark">
+							<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+							90% 
+							</div>
+						</div>
+					</dd>
+					<dt class="col-4 col-sm-3 col-md-4 col-lg-3 text-right">
+						SQL
+					</dt>
+					<dd class="col-8 col-sm-3 col-md-8 col-lg-3">
+						<div class="progress bg-dark">
+							<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+							95% 
+							</div>
+						</div>
+					</dd>
+					<dt class="col-4 col-sm-3 col-md-4 col-lg-3 text-right">
+						HTML5
+					</dt>
+					<dd class="col-8 col-sm-3 col-md-8 col-lg-3">
+						<div class="progress bg-dark">
+							<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+							95% 
+							</div>
+						</div>
+					</dd>
+					<dt class="col-4 col-sm-3 col-md-4 col-lg-3 text-right">
+						CSS3
+					</dt>
+					<dd class="col-8 col-sm-3 col-md-8 col-lg-3">
+						<div class="progress bg-dark">
+							<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+							95% 
+							</div>
+						</div>
+					</dd>
+					<dt class="col-4 col-sm-3 col-md-4 col-lg-3 text-right">
+						Javascript
+					</dt>
+					<dd class="col-8 col-sm-3 col-md-8 col-lg-3">
+						<div class="progress bg-dark">
+							<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+							90% 
+							</div>
+						</div>
+					</dd>
+					<dt class="col-4 col-sm-3 col-md-4 col-lg-3 text-right">
+						Jquery
+					</dt>
+					<dd class="col-8 col-sm-3 col-md-8 col-lg-3">
+						<div class="progress bg-dark">
+							<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+							85% 
+							</div>
+						</div>
+					</dd>
+					<dt class="col-4 col-sm-3 col-md-4 col-lg-3 text-right">
+						Hibernate
+					</dt>
+					<dd class="col-8 col-sm-3 col-md-8 col-lg-3">
+						<div class="progress bg-dark">
+							<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+							75% 
+							</div>
+						</div>
+					</dd>	
+					<dt class="col-4 col-sm-3 col-md-4 col-lg-3 text-right">
+						JSP
+					</dt>
+					<dd class="col-8 col-sm-3 col-md-8 col-lg-3">
+						<div class="progress bg-dark">
+							<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+							80% 
+							</div>
+						</div>
+					</dd>	
+					<dt class="col-4 col-sm-3 col-md-4 col-lg-3 text-right">
+						JSF
+					</dt>
+					<dd class="col-8 col-sm-3 col-md-8 col-lg-3">
+						<div class="progress bg-dark">
+							<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+							80% 
+							</div>
+						</div>
+					</dd>	
+					<dt class="col-4 col-sm-3 col-md-4 col-lg-3  text-right">
+						PrimeFaces
+					</dt>
+					<dd class="col-8 col-sm-3 col-md-8 col-lg-3 ">
+						<div class="progress bg-dark">
+							<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+							80% 
+							</div>
+						</div>
+					</dd>
+					<dt class="col-4 col-sm-3 col-md-4 col-lg-3 text-right">
+						Angular
+					</dt>
+					<dd class="col-8 col-sm-3 col-md-8 col-lg-3">
+						<div class="progress bg-dark">
+							<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+							70% 
+							</div>
+						</div>
+					</dd>	
+					<dt class="col-4 col-sm-3 col-md-4 col-lg-3 text-right">
+						React
+					</dt>
+					<dd class="col-8 col-sm-3 col-md-8 col-lg-3">
+						<div class="progress bg-dark">
+							<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+							50% 
+							</div>
+						</div>
+					</dd>
+					<dt class="col-4 col-sm-3 col-md-4 col-lg-3 text-right">
+						RESTful
+					</dt>
+					<dd class="col-8 col-sm-3 col-md-8 col-lg-3">
+						<div class="progress bg-dark">
+							<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+							85% 
+							</div>
+						</div>
+					</dd>
+					<dt class="col-4 col-sm-3 col-md-4 col-lg-3 text-right">
+						Bootstrap
+					</dt>
+					<dd class="col-8 col-sm-3 col-md-8 col-lg-3">
+						<div class="progress bg-dark">
+							<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+							80% 
+							</div>
+						</div>
+					</dd>
+					<dt class="col-4 col-sm-3 col-md-4 col-lg-3 text-right">
+						Delphi
+					</dt>
+					<dd class="col-8 col-sm-3 col-md-8 col-lg-3">
+						<div class="progress bg-dark">
+							<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+							90% 
+							</div>
+						</div>
+					</dd>
+				</dl>
 			</div>
-		</div>		
-		
-		<div class="cssSection cssDivsInColumns">
-			<div class="cssSectionTitle">
-				Formaci&oacute;n Academica
-			</div>
-			<div class="cssSectionInfo cssEducation">
-				<ul>
-					<li>Ingeniero T&eacute;cnico Inform&aacute;tico, especialidad sistemas 1992-1996</li>
-					<li>T&eacute;cnico especialista en Sistemas Aut&oacute;matas Programables 1993-1994</li>
-					<li>T&eacute;cnico especialista en Electr&oacute;nica 1987-1992</li>
+		</div>
+		<div class="card bg-info text-white cssLanguages">
+			<h5 class="card-header text-white bg-primary">
+			Languages
+			</h5>
+			<div class="card-body">
+				<ul class="row list-unstyled">
+					<li class="col-12 col-sm-6 col-lg-5 col-xl-4 text-left">
+						<div class="row">
+							<span class="col-4 col-xl-4 text-right p-0">Spanish</span> 
+							<div class="col-8 col-xl-8 p-0">
+								<span class="circle bg-success"></span><span class="circle bg-success"></span><span class="circle bg-success"></span><span class="circle bg-success"></span><span class="circle bg-success"></span>
+							</div>
+						</div>
+					</li>
+					<li class="col-12 col-sm-6 col-lg-4 col-xl-4 text-left">
+						<div class="row">
+							<span class="col-4 text-right p-0">English</span> 
+							<div class="col-8 p-0">
+								<span class="circle bg-success"></span><span class="circle bg-success"></span><span class="circle bg-success"></span><span class="circle bg-success"></span>
+							</div>
+						</div>
+					</li>
+					<li class="col-12 col-sm-6 col-lg-3 col-xl-3 text-left">
+						<div class="row">
+							<span class="col-4 col-xl-4 text-right p-0">Frech</span> 
+							<div class="col-8 col-xl-7 p-0">
+								<span class="circle bg-warning"></span><span class="circle bg-warning"></span><span class="circle bg-warning"></span>
+							</div>
+						</div>
+					</li>
 				</ul>
 			</div>
 		</div>
-		<div class="cssSection cssDivsInColumns">
-			<div class="cssSectionTitle">
-				Idiomas
-			</div>
-			<div class="cssSectionInfo cssLanguage">
-				<ul>
-					<li>Espa&ntilde;ol (lengua materna)</li>
-					<li>Ingl&eacute;s conversaci&oacute;n (trabajando varios a&ntilde;os en diferentes proyectos internacionales)</li>
-					<li>Franc&eacute;s nivel intermedio</li>
-				</ul>
-			</div>
-		</div>	
-		<div class="cssSection cssDivsInColumns">
-			<div class="cssSectionTitle">
-				Ademas
-			</div>
-			<div class="cssSectionInfo cssMore">
-				<p>Este es un breve resumen de mi perfil profesional, no duden en ponerse en contacto si necesitan que les aclare algunos de los puntos que hay expuestos o quieren conocer algo mas sobre mi
-				<p>Un saludo
-			</div>
-		</div>		
+				
+		<div class="educational">
+			<h4 class="text-center">Education</h4>
+			<section class="timeline">
+			  <ul>
+				<li>
+					<div>
+						<h6>
+						Degree in Computer Science
+						</h6>
+						<p>Oviedo University</p>
+						<div>
+							1992-1996
+						</div>
+					</div>
+				</li>
+				<li>
+					<div>
+						<h6>
+						High Vocational Training Grade in PLC
+						</h6>
+						<div>
+							1992-1994
+						</div>
+					</div>
+				</li>	
+				<li>
+					<div>
+						<h6>
+						Vocational Trainig Grade in Electronics 
+						</h6>
+						<div>
+							1987-1992
+						</div>
+					</div>
+				</li>
+			  </ul>
+			</section>
+		</div>
 		
-	</div>
-</body>
-</html>
+	</div>	
+</div>
+

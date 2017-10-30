@@ -12,47 +12,7 @@
 		border:0px;
 	}
 
-	body {
-		margin-top: 40px;
-		font-size: 14px;
-		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-		}
-	.cssMainCalendarDiv {
-		width: 95%;
-		margin: auto;
-		padding-top: 100px;
-	}
-	.cssCalendarDiv {
-		
-		width: 850px;
-		margin: 0 auto;
-		 /* flexbox setup */
-		display: -webkit-box;
-		display: -moz-box;
-		display: -ms-flexbox;
-		display: -webkit-flex;
-		display: flex;	
 
-		-webkit-box-direction: normal;
-		-moz-box-direction: normal;
-		-webkit-box-orient: horizontal;
-		-moz-box-orient: horizontal;
-		-webkit-flex-direction: row;
-		-ms-flex-direction: row;
-		flex-direction: row;		
-
-		-webkit-box-pack: center;
-		-moz-box-pack: center;
-		-webkit-justify-content: center;
-		-ms-flex-pack: center;
-		justify-content: center;
-		  
-		-webkit-box-align: start;
-		-moz-box-align: start;
-		-webkit-align-items: flex-start;
-		-ms-flex-align: start;
-		align-items: flex-start;
-		}
 		
 	#external-events {
 		width: 150px;
@@ -92,8 +52,6 @@
 		}
 
 	#calendar {
-		width: 700px;
-		border: solid 2px red;
 		border-radius: 10px;
 		padding:5px;
 		background: #EEEEFF;

@@ -3,168 +3,148 @@
 <head>
 <meta charset="utf-8">
 <title>ALALAR WEB</title>
-<script src="./js/translation.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+
+<script  src="https://code.jquery.com/jquery-3.2.1.min.js"  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+
 <link href='http://fonts.googleapis.com/css?family=Arvo|Audiowide|Rock+Salt' rel='stylesheet' type='text/css'>
+
 <link href='./css/main.css' rel='stylesheet' type='text/css'>
 
+<script src="./js/translation.js"></script>
+<script src="./js/main.js"></script>
 <script>
-	var language = "EN";
-	$(window).load(function(){
-		$(".cssSplashWindow").hide();
-		setInterval(slideImages,8000);			
-	});
-	$(document).ready(function(){
-		$(".cssAboutMe > .buttondown").click(function () {
-		   $( ".cssAboutMe" ).slideUp( "slow", function () {$( ".cssAboutMe1" ).slideDown()});
-		});
-		$(".cssAboutMe1 > .buttonup").click(function () {
-		   $( ".cssAboutMe1" ).slideUp( "slow", function () {$( ".cssAboutMe" ).slideDown()});
-		});
-		$(".description > .description-text >.buttonprev").click(function () {
-		   $slide = $($(".sliderinner>ul>li")[parseInt($('input:checked').attr('id').slice(-1))-1]);
-		   $slide.find( ".description" ).fadeOut();
-		   $slide.find( ".description1" ).show().animate({left: "50%"},1000, "linear");
-		});
-		$(".description1 > .description-text > .buttonnext").click(function () {
-			$slide = $($(".sliderinner>ul>li")[parseInt($('input:checked').attr('id').slice(-1))-1]);
-		    $slide.find( ".description1" ).animate({left: "100%"},1000, "linear",function(){$slide.find( ".description1" ).hide();$slide.find( ".description" ).fadeIn()});
-		});
-		$("#hyperLang").click(function () {
-			translatePageTo(language);
-			if (language=="EN")
-				language="SP"
-			else
-				language="EN";
-		});
-	});
+
 	
-	function slideImages() {
-		intControl = parseInt($('input:checked').attr('id').slice(-1));
-		if ($("#control" + (intControl+1)).length > 0 )
-			intControl += 1
-		else
-			intControl = 1;
-		$("#control" + (intControl)).prop("checked",true);
-	}
 </script>
+
+<style>
+.carousel-item img {
+	height:100vh;
+}
+</style>
 
 </head>
  
 <body>
-	<div class="cssSplashWindow"></div>
-	<div class="cssTop cssTopSmall cssDivsInColumns">
-        <div class="cssName">
+		<nav id="mainMenu" class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+		  <a class="navbar-brand cssBrilla" href="./index.html">
+			<img src="./Imagenes/foto.gif" class="d-inline-block align-top rounded-circle" style="width:34px;margin-top:-10px" alt="">
 			ALBERTO ALVAREZ ARBESU
-		</div>
-		<div class="cssTitle ">
-		<ul class="cssDivsInColumns cssBrilla cssIndexOptions">
-			<li><a href="./cv.html">ver mi CV</a></li>
-			<li><a href="./javademo.html">Java</a></li>
-			<li><a id="hyperLang" href="#">English</a></li>
-		</ul>
-			
-		</div>
-		<div class="cssEmail">
-			<a href="mailto:alalar@wanadoo.es">alalar@wanadoo.es</a>
-		</div>
-    </div>
+		  </a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+			<ul class="navbar-nav w-100 justify-content-between">
+			  <li class="nav-item">
+				<a class="nav-link cssBrilla" href="./cv.html">ver mi CV</a>
+			  </li>
+			  <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle cssBrilla" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  Ejemplos Java
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				  <a class="dropdown-item " href="./javademo.html">Java</a>
+				  <div class="dropdown-divider"></div>
+				  <a class="dropdown-item" href="#">Booking apartment Angular</a>
+				</div>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link cssBrilla" id="hyperLang" href="#">English</a>
+			  </li>
+			  <li class="nav-item">
+					<a class="nav-link cssBrilla" href="mailto:alalar@wanadoo.es">alalar@wanadoo.es</a>
+				</li>
+			</ul>
+		  </div>
+		</nav>
 	<div class="cssAboutMe1">
 		<span class="buttonup"></span>
 	</div>
-	<div class="cssAboutMe">
-		<div class="cssImgTitle">
-			<img src="./Imagenes/foto.gif" />
-		</div>	
-		<span class="buttondown"></span>
-		<p>HOLA! BIENVENIDO A MI PAGINA</p>
-		<p>Soy programador "freelance" con mas de 10 anos de experiencia</p>
-		<p>Aqui podras ver un poco lo que hago y me gusta</p>
-		<p>Como ves en las fotos me gusta mucho viajar!!!</p>
+	<div class="cssAboutMe col-12">
+		<div class="row">
+			<div class="col-1 offset-1 text-left">
+				<span class="buttondown"></span>
+			</div>
+			<div class="col-2 text-right">
+				<img class="rounded-circle" style="width:100px" src="./Imagenes/foto.gif" />
+			</div>	
+			<div class="col-8">
+				<p>HOLA! BIENVENIDO A MI PAGINA</p>
+				<p>Soy programador "freelance" con mas de 10 anos de experiencia</p>
+				<p>Aqui podras ver un poco lo que hago y me gusta</p>
+				<p>Como ves en las fotos me gusta mucho viajar!!!</p>
+			</div>
+		</div>
 	</div>
-   <div class="slider"> 
-        <input type="radio" id="control1" name="controls" checked="checked"/>
-        <label for="control1"></label>
-        <input type="radio" id="control2" name="controls"/>
-        <label for="control2"></label>
-        <input type="radio" id="control3" name="controls"/>
-        <label for="control3"></label>
-        <input type="radio" id="control4" name="controls"/>
-        <label for="control4"></label>
-        <input type="radio" id="control5" name="controls"/>
-        <label for="control5"></label>
-        <div class="sliderinner">
-            <ul>
-                <li>
-                    <img src="./Imagenes/Paris.jpg" />
-                    <div class="description">
-                         <div class="description-text">
-                            <span class="buttonprev"></span><h2>Paris</h2>
-                        </div>
-                    </div>
-					<div class="description1">
-                         <div class="description-text">
-                            <span class="buttonnext"></span><h2>Paris. Esta es una foto sacada desde el Louvre</h2>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <img src="./Imagenes/Grecia.jpg" />
-                    <div class="description">
-                         <div class="description-text">
-                            <span class="buttonprev"></span><h2>Grecia</h2>
-                        </div>
-                    </div>
-					<div class="description1">
-                         <div class="description-text">
-                            <span class="buttonnext"></span><h2>Grecia. La famosa puesta de sol desde Santorini</h2>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <img src="./Imagenes/Grecia2.jpg" />
-                    <div class="description">
- 
-                        <div class="description-text">
-                            <span class="buttonprev"></span><h2>Grecia II</h2>
-                        </div>
-                    </div>
-					<div class="description1">
-                         <div class="description-text">
-                            <span class="buttonnext"></span><h2>Grecia II. Otra foto de la magnifica Santorini</h2>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <img src="./Imagenes/Noruega.jpg" />
-                    <div class="description">
- 
-                        <div class="description-text">
-                            <span class="buttonprev"></span><h2>Noruega</h2>
-                        </div>
-                    </div>
-					<div class="description1">
-                         <div class="description-text">
-                            <span class="buttonnext"></span><h2>Noruega. Una lengua de glaciar y era Septiembre!!</h2>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <img src="./Imagenes/Nieve.jpg" />
-                    <div class="description">
- 
-                        <div class="description-text">
-                            <span class="buttonprev"></span><h2>Mushing</h2>
-                        </div>
-                    </div>
-					<div class="description1">
-                         <div class="description-text">
-                            <span class="buttonnext"></span><h2>Mushing. Trineo tirado con perros muy recomendable</h2>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div><!--slider-->
+	<div class="cssWelcomeMessage w-100 text-center">
+		<h1><span class='mainInfo'></span><span class="blink"></span></h1>
+	</div>
+	
+	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="5000">
+	  <ol class="carousel-indicators">
+		<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+		<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+		<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+		<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+		<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+	  </ol>
+	  <div class="carousel-inner ">
+		<div class="carousel-item active">
+		  <img class="d-block w-100" style="heightx:100vh" src="./Imagenes/Paris.jpg" alt="Paris">
+		  <div class="carousel-caption d-none d-md-block">
+			<h3>Paris</h3>
+			<p>Foto de Paris</p>
+		  </div>
+		</div>
+		<div class="carousel-item">
+		  <img class="d-block w-100" src="./Imagenes/Grecia.jpg" alt="Grecia">
+		  <div class="carousel-caption d-none d-md-block">
+			<h3>Grecia</h3>
+			<p>Foto de Grecia</p>
+		  </div>
+		</div>
+		<div class="carousel-item">
+		  <img class="d-block w-100" src="./Imagenes/Grecia2.jpg" alt="Grecia2">
+		  <div class="carousel-caption d-none d-md-block">
+			<h3>Grecia II</h3>
+			<p>Foto de Grecia</p>
+		  </div>
+		</div>
+		<div class="carousel-item">
+		  <img class="d-block w-100" src="./Imagenes/Noruega.jpg" alt="Noruega">
+		  <div class="carousel-caption d-none d-md-block">
+			<h3>Noruega</h3>
+			<p>Foto de Noruega</p>
+		  </div>
+		</div>
+		<div class="carousel-item">
+		  <img class="d-block w-100" src="./Imagenes/Nieve.jpg" alt="Nieve">
+		  <div class="carousel-caption d-none d-md-block">
+			<h3>Nieve</h3>
+			<p>Foto de Nieve</p>
+		  </div>
+		</div>		
+	  </div>
+	  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="sr-only">Previous</span>
+	  </a>
+	  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="sr-only">Next</span>
+	  </a>
+	</div>
+	
+	
+   
 </body>
 </html>

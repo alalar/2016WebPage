@@ -4,6 +4,290 @@ webpackJsonp([1,4],{
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = matchingPasswords;
+// FORM GROUP VALIDATORS
+function matchingPasswords() {
+    return function (group) {
+        var passwordControl = group.controls['password'];
+        var confirmPasswordControl = group.controls['confirmPassword'];
+        var password = passwordControl.value; // to get value in input tag
+        var confirmPassword = confirmPasswordControl.value; // to get value in input tag
+        if (password != confirmPassword) {
+            confirmPasswordControl.setErrors({ MatchPassword: true });
+        }
+        else {
+            confirmPasswordControl.setErrors(null);
+            return null;
+        }
+    };
+}
+//# sourceMappingURL=password.validator.js.map
+
+/***/ }),
+
+/***/ 101:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap__ = __webpack_require__(173);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_user__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_password_validator__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_async_unique_field_validator__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_users_localstorage__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__user_service__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__user_form_table_communication_service__ = __webpack_require__(36);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserFormComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+//import { Router, ActivatedRoute, Params } from '@angular/router';
+
+
+
+
+
+
+
+var UserFormComponent = (function () {
+    function UserFormComponent(userService, fb, 
+        //private route: ActivatedRoute, private router: Router,
+        userFormTableService) {
+        var _this = this;
+        this.userService = userService;
+        this.fb = fb;
+        this.userFormTableService = userFormTableService;
+        this.errors = [];
+        this.submitting = false;
+        this.onSubmitted = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]();
+        this.user = new __WEBPACK_IMPORTED_MODULE_3__shared_user__["a" /* User */]();
+        userFormTableService.editingItemInList$.subscribe(function (userId) {
+            _this.user = null;
+            _this.userService.getUser(userId).subscribe(function (user) {
+                if (userId != null && !isNaN(userId)) {
+                    _this.user = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__shared_users_localstorage__["c" /* readFromLocalStorageUser */])(userId);
+                }
+                if (_this.user == null) {
+                    _this.user = new __WEBPACK_IMPORTED_MODULE_3__shared_user__["a" /* User */]();
+                }
+                _this.revert();
+            });
+        });
+    }
+    UserFormComponent.prototype.createForm = function () {
+        this.userForm = this.fb.group({
+            userId: [null],
+            name: [null, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].minLength(5), __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].maxLength(90)])],
+            username: [null, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].minLength(5), __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].maxLength(25)])],
+            address: [null, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].maxLength(80)])],
+            city: [null, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].maxLength(50)])],
+            phone: [null, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].pattern('^\\d{9}$')])],
+            email: [null, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].email])],
+            password: [null],
+            confirmPassword: [null]
+        }, {
+            validator: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__shared_password_validator__["a" /* matchingPasswords */])() // your validation method
+        });
+    };
+    UserFormComponent.prototype.addNewUser = function () {
+        this.user = new __WEBPACK_IMPORTED_MODULE_3__shared_user__["a" /* User */]();
+        this.revert();
+    };
+    UserFormComponent.prototype.revert = function () {
+        this.userForm.reset(this.user);
+        this.userForm.controls['email'].setAsyncValidators(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__shared_async_unique_field_validator__["a" /* AsyncUniqueFieldValidator */])(this.user.userId, this.userService, "email"));
+        this.userForm.controls['email'].updateValueAndValidity();
+        this.userForm.controls['username'].setAsyncValidators(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__shared_async_unique_field_validator__["a" /* AsyncUniqueFieldValidator */])(this.user.userId, this.userService, "username"));
+        this.userForm.controls['username'].updateValueAndValidity();
+        if (this.userForm.controls['password']) {
+            if (this.user == null || this.user.userId == null) {
+                this.userForm.controls['password'].setValidators(__WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].pattern('^((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,})$')]));
+            }
+            else {
+                this.userForm.controls['password'].setValidators(null);
+            }
+            this.userForm.controls['password'].updateValueAndValidity();
+        }
+    };
+    UserFormComponent.prototype.ngOnInit = function () {
+        this.createForm();
+        this.revert();
+    };
+    UserFormComponent.prototype.onSubmit = function () {
+        var _this = this;
+        this.errors = [];
+        this.submitting = true;
+        if (this.userForm.valid) {
+            this.userService.save(this.userForm.value).subscribe(function (user) {
+                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__shared_users_localstorage__["d" /* saveLocalStorageUser */])(user);
+                _this.submitting = false;
+                _this.userFormTableService.updatedItem();
+                _this.addNewUser();
+            }, function (error) { _this.errors.push(error), _this.submitting = false; });
+        }
+    };
+    return UserFormComponent;
+}());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Output */])(),
+    __metadata("design:type", Object)
+], UserFormComponent.prototype, "onSubmitted", void 0);
+UserFormComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* Component */])({
+        selector: 'user-form',
+        template: __webpack_require__(162)
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_7__user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__user_service__["a" /* UserService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormBuilder */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_8__user_form_table_communication_service__["a" /* UserFormTableService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__user_form_table_communication_service__["a" /* UserFormTableService */]) === "function" && _c || Object])
+], UserFormComponent);
+
+var _a, _b, _c;
+//# sourceMappingURL=user-form.component.js.map
+
+/***/ }),
+
+/***/ 102:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserMainComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var UserMainComponent = (function () {
+    function UserMainComponent() {
+    }
+    return UserMainComponent;
+}());
+UserMainComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* Component */])({
+        template: "\n            <div class=\"row\">\n                <div class=\"col-sm-5\">\n                    <user-form></user-form>\n                </div>\n                <div class=\"col-sm-7\">\n                    <user-table></user-table>\n                </div>\n            <div>\n            "
+    })
+], UserMainComponent);
+
+//# sourceMappingURL=user-main.component.js.map
+
+/***/ }),
+
+/***/ 103:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_observable_of__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_observable_of__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_catch__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_catch__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_debounceTime__ = __webpack_require__(169);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_debounceTime___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_debounceTime__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_distinctUntilChanged__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_distinctUntilChanged___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_distinctUntilChanged__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__user_service__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_users_localstorage__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__user_form_table_communication_service__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_modal_component__ = __webpack_require__(58);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UsersTableComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+// Observable class extensions
+
+// Observable operators
+
+
+
+
+
+
+
+var UsersTableComponent = (function () {
+    function UsersTableComponent(userService, 
+        //private router: Router, 
+        userFormTableService) {
+        var _this = this;
+        this.userService = userService;
+        this.userFormTableService = userFormTableService;
+        this.showFilterBox = true;
+        this.sortedByFieldName = "userId";
+        this.ascendingOrder = true;
+        userFormTableService.updatedItemInList$.subscribe(function (isDone) {
+            if (isDone) {
+                _this.ngOnInit();
+            }
+        });
+    }
+    UsersTableComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.users = null;
+        this.userService.getUsers().subscribe(function (users) {
+            _this.users = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__shared_users_localstorage__["a" /* getLocalStorageUsers */])(users);
+        });
+    };
+    UsersTableComponent.prototype.sortingByColumn = function (fieldName) {
+        if (this.sortedByFieldName == fieldName) {
+            this.ascendingOrder = !this.ascendingOrder;
+        }
+        else {
+            this.ascendingOrder = true;
+        }
+        this.sortedByFieldName = fieldName;
+    };
+    UsersTableComponent.prototype.showRemoveModalDlg = function (userToRemove) {
+        var _this = this;
+        var infoTemplate = "\n            Do you want to remove user <strong> " + userToRemove.username + " </strong> ?\n             <dl class=\"row\">\n                    <dt class=\"col-1 text-right\"><i class=\"fa fa-user\" aria-hidden=\"true\"></i></dt>\n                    <dd class=\"col-11\">" + userToRemove.name + "</dd>\n                    <dt class=\"col-1\"><i class=\"fa fa-home\" aria-hidden=\"true\"></i></dt>\n                    <dd class=\"col-11\">" + userToRemove.address + " , " + userToRemove.city + "</dd>\n                    <dt class=\"col-1\"><i class=\"fa fa-phone\" aria-hidden=\"true\"></i></dt>\n                    <dd class=\"col-11\">" + userToRemove.phone + "</dd>\n                    <dt class=\"col-1\"><span>@</span></dt>\n                    <dd class=\"col-11\">" + userToRemove.email + "</dd>\n            </dl>";
+        this.modal.show('Removing users', infoTemplate);
+        this.subscription = this.modal.blnResult.subscribe(function (blnRemove) {
+            if (blnRemove) {
+                _this.userService.delete(userToRemove.userId).subscribe(function (user) { __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__shared_users_localstorage__["b" /* removeLocalStorageUser */])(userToRemove.userId); _this.ngOnInit(); }, function (error) { console.log(error); });
+            }
+            // unsubscribe is necessary such that the observable doesn't keep racking up listeners
+            _this.subscription.unsubscribe();
+        });
+    };
+    return UsersTableComponent;
+}());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_2" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_8__shared_modal_component__["a" /* ModalComponent */]),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_8__shared_modal_component__["a" /* ModalComponent */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__shared_modal_component__["a" /* ModalComponent */]) === "function" && _a || Object)
+], UsersTableComponent.prototype, "modal", void 0);
+UsersTableComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* Component */])({
+        selector: 'user-table',
+        template: __webpack_require__(163)
+    }),
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__user_service__["a" /* UserService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_7__user_form_table_communication_service__["a" /* UserFormTableService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__user_form_table_communication_service__["a" /* UserFormTableService */]) === "function" && _c || Object])
+], UsersTableComponent);
+
+var _a, _b, _c;
+//# sourceMappingURL=users-table.component.js.map
+
+/***/ }),
+
+/***/ 104:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
 // The file contents for the current environment will overwrite these during build.
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
@@ -17,42 +301,42 @@ var environment = {
 
 /***/ }),
 
-/***/ 157:
+/***/ 161:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\r\n    <h1 class=\"text-center\">CRUD with Angular 2</h1>\r\n    <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n            <user-form></user-form>\r\n        </div>\r\n        <div class=\"col-sm-8\">\r\n            <user-table></user-table>\r\n        </div>\r\n    <div>\r\n</div>\r\n"
+module.exports = "<div class=\"container-fluid\">\r\n    <h1 class=\"text-center\">Simple CRUD app with Angular 2 and Bootstrap 4</h1>\r\n    <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n            <user-form></user-form>\r\n        </div>\r\n        <div class=\"col-sm-8\">\r\n            <user-table></user-table>\r\n        </div>\r\n    <div>\r\n</div>\r\n"
 
 /***/ }),
 
-/***/ 158:
+/***/ 162:
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"user==null\" class=\"alert alert-info \">Loading user info <span class=\"glyphicon glyphicon-refresh glyphicon-refresh-animate\"></span></div>\r\n<div *ngIf=\"user!=null\" class=\"panel panel-primary\">\r\n    <div class=\"panel-heading\">\r\n        <span *ngIf=\"user!=null && user.userId!=null\">Editing User {{user.userId}}</span>\r\n        <span *ngIf=\"user==null || user.userId==null\">Adding a new User</span>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n        <form [formGroup]=\"userForm\" (ngSubmit)=\"onSubmit()\" novalidate >\r\n            <input type=\"hidden\" formControlName=\"userId\">\r\n            <div class=\"form-group has-feedback\" [ngClass]=\"{'has-success': userForm.controls.username.valid,'has-error':!userForm.controls.username.valid}\">\r\n                <label class=\"control-label\" for=\"username\">User Name</label>\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\">\r\n                        <span class=\"glyphicon glyphicon glyphicon-user\" ></span>\r\n                    </span>\r\n                    \r\n                    <input class=\"form-control\" formControlName=\"username\" placeholder=\"enter a user name\">\r\n                    <span class=\"glyphicon form-control-feedback\" [ngClass]=\"{'glyphicon-ok': userForm.controls.username.valid,'glyphicon-remove':!userForm.controls.username.valid}\"></span>\r\n                </div>\r\n                <div *ngIf=\"userForm.controls.username.hasError('CheckingDuplicatedItem')\" class=\"alert alert-info \">Checking if username exists <span class=\"glyphicon glyphicon-refresh glyphicon-refresh-animate\"></span></div>\r\n                <!-- The hasError method can work with the built in validators but custom validators as well -->\r\n                <div *ngIf=\"userForm.controls.username.hasError('required')\" class=\"alert alert-danger \">You must include a username.</div>\r\n                <div *ngIf=\"userForm.controls.username.hasError('minlength')\" class=\"alert alert-danger \">Your username must be at least 5 characters long.</div>\r\n                <div *ngIf=\"userForm.controls.username.hasError('maxlength')\" class=\"alert alert-danger \">Your username cannot exceed 10 characters.</div>\r\n                <div *ngIf=\"userForm.controls.username.hasError('DuplicatedItem') && userForm.controls.username.value\" class=\"alert alert-danger \">username already exists</div>\r\n            </div>            \r\n           <div class=\"form-group has-feedback\" [ngClass]=\"{'has-success': userForm.controls.name.valid,'has-error':!userForm.controls.name.valid}\">\r\n                <label class=\"control-label\" for=\"name\">Full Name</label>\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\">\r\n                        <span class=\"glyphicon glyphicon glyphicon-user\" ></span>\r\n                    </span>\r\n                    \r\n                    <input class=\"form-control\" formControlName=\"name\" placeholder=\"enter full name\">\r\n                    <span class=\"glyphicon form-control-feedback\" [ngClass]=\"{'glyphicon-ok': userForm.controls.name.valid,'glyphicon-remove':!userForm.controls.name.valid}\"></span>\r\n                </div>\r\n                <!-- The hasError method can work with the built in validators but custom validators as well -->\r\n                <div *ngIf=\"userForm.controls.name.hasError('required')\" class=\"alert alert-danger \">You must include a full name.</div>\r\n                <div *ngIf=\"userForm.controls.name.hasError('minlength')\" class=\"alert alert-danger \">Your name must be at least 5 characters long.</div>\r\n                <div *ngIf=\"userForm.controls.name.hasError('maxlength')\" class=\"alert alert-danger \">Your name cannot exceed 10 characters.</div>\r\n            </div> \r\n             <div class=\"form-group has-feedback\" [ngClass]=\"{'has-success': userForm.controls.address.valid,'has-error':!userForm.controls.address.valid }\">\r\n                <label class=\"control-label\" for=\"address\">address</label>\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\">\r\n                        <span class=\"glyphicon glyphicon glyphicon-road\" ></span>\r\n                    </span>\r\n                    <input class=\"form-control\" formControlName=\"address\" placeholder=\"enter an address\">\r\n                    <span class=\"glyphicon form-control-feedback\" [ngClass]=\"{'glyphicon-ok': userForm.controls.address.valid,'glyphicon-remove':!userForm.controls.address.valid}\"></span>\r\n                </div>\r\n                <!-- The hasError method can work with the built in validators but custom validators as well -->\r\n                <div *ngIf=\"userForm.controls.address.hasError('required')\" class=\"alert alert-danger \">You must include an address.</div>\r\n            </div> \r\n            <div class=\"form-group has-feedback\" [ngClass]=\"{'has-success': userForm.controls.city.valid,'has-error':!userForm.controls.city.valid}\">\r\n                <label class=\"control-label\" for=\"city\">city</label>\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\">\r\n                        <span class=\"glyphicon glyphicon glyphicon-map-marker\" ></span>\r\n                    </span>\r\n                    <input class=\"form-control\" formControlName=\"city\" placeholder=\"enter a city\">\r\n                    <span class=\"glyphicon form-control-feedback\" [ngClass]=\"{'glyphicon-ok': userForm.controls.city.valid,'glyphicon-remove':!userForm.controls.city.valid}\"></span>\r\n                </div>\r\n                <!-- The hasError method can work with the built in validators but custom validators as well -->\r\n                <div *ngIf=\"userForm.controls.city.hasError('required')\" class=\"alert alert-danger \">You must include a city.</div>\r\n            </div>   \r\n            <div class=\"form-group has-feedback\" [ngClass]=\"{'has-success': userForm.controls.phone.valid,'has-error':!userForm.controls.phone.valid}\">\r\n                <label class=\"control-label\" for=\"phone\">phone</label>\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\">\r\n                        <span class=\"glyphicon glyphicon glyphicon-phone\" ></span>\r\n                    </span>\r\n                    <input class=\"form-control\" formControlName=\"phone\" placeholder=\"enter a phone number\">\r\n                    <span class=\"glyphicon form-control-feedback\" [ngClass]=\"{'glyphicon-ok': userForm.controls.phone.valid,'glyphicon-remove':!userForm.controls.phone.valid}\"></span>\r\n                </div>\r\n                <!-- The hasError method can work with the built in validators but custom validators as well -->\r\n                <div *ngIf=\"userForm.controls.phone.hasError('required')\" class=\"alert alert-danger \">You must include a phone number.</div>\r\n                <div *ngIf=\"userForm.controls.phone.hasError('pattern') && userForm.controls.phone.value\" class=\"alert alert-danger \">Phone number is made of 9 digits</div>\r\n            </div>                     \r\n            <div class=\"form-group has-feedback\" [ngClass]=\"{'has-success': userForm.controls.email.valid,'has-error':!userForm.controls.email.valid}\">\r\n                <label class=\"control-label\" for=\"email\">Email</label>\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\">\r\n                        @\r\n                    </span>\r\n                    <input class=\"form-control\" formControlName=\"email\" placeholder=\"enter an email\">\r\n                    <span class=\"glyphicon form-control-feedback\" [ngClass]=\"{'glyphicon-ok': userForm.controls.email.valid,'glyphicon-remove':!userForm.controls.email.valid}\"></span>\r\n                </div>\r\n                <div *ngIf=\"userForm.controls.email.hasError('CheckingDuplicatedItem')\" class=\"alert alert-info \">Checking if email exists <span class=\"glyphicon glyphicon-refresh glyphicon-refresh-animate\"></span></div>\r\n                <!-- The hasError method can work with the built in validators but custom validators as well -->\r\n                <div *ngIf=\"userForm.controls.email.hasError('required')\" class=\"alert alert-danger \">You must include a user email.</div>\r\n                <div *ngIf=\"userForm.controls.email.hasError('email') && userForm.controls.email.value\" class=\"alert alert-danger \">Your user email is not valid</div>\r\n                <div *ngIf=\"userForm.controls.email.hasError('DuplicatedItem') && userForm.controls.email.value\" class=\"alert alert-danger \">Email already exists</div>\r\n            </div> \r\n            <div class=\"form-group has-feedback\" [ngClass]=\"{'has-success': (userForm.controls.confirmPassword.value == userForm.controls.password.value) && userForm.controls.confirmPassword.value!=null?userForm.controls.confirmPassword.value.length>0:false,'has-error':(userForm.controls.confirmPassword.value != userForm.controls.password.value) || !userForm.controls.password.valid}\">\r\n                <label class=\"control-label\" for=\"password\">Password</label>\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\">\r\n                        <span class=\"glyphicon glyphicon glyphicon-lock\" ></span>\r\n                    </span>\r\n                    <input type=\"password\" class=\"form-control\" formControlName=\"password\" placeholder=\"enter a password\">\r\n                    <span class=\"glyphicon form-control-feedback\" [ngClass]=\"{'glyphicon-ok': (userForm.controls.confirmPassword.value == userForm.controls.password.value) && userForm.controls.confirmPassword.value!=null?userForm.controls.confirmPassword.value.length>0:false,'glyphicon-remove':(userForm.controls.confirmPassword.value != userForm.controls.password.value)}\"></span>\r\n                </div>\r\n                <!-- The hasError method can work with the built in validators but custom validators as well -->\r\n                <div *ngIf=\"userForm.controls.password.hasError('required')\" class=\"alert alert-danger \">You must include a password</div>\r\n                <div *ngIf=\"userForm.controls.password.hasError('pattern')\" class=\"alert alert-danger \">Password length must be at least 8 chars, 1 Uppercase letter, 1 Lowercase letter and 1 digit</div>\r\n            </div>    \r\n             <div class=\"form-group has-feedback\" [ngClass]=\"{'has-success': (userForm.controls.confirmPassword.value == userForm.controls.password.value) && userForm.controls.confirmPassword.value!=null?userForm.controls.confirmPassword.value.length>0:false,'has-error':(userForm.controls.confirmPassword.value != userForm.controls.password.value)}\">\r\n                <label class=\"control-label\" for=\"confirmPassword\">Confirm Password</label>\r\n                <div class=\"input-group\">\r\n                    <span class=\"input-group-addon\">\r\n                        <span class=\"glyphicon glyphicon glyphicon-lock\" ></span>\r\n                    </span>\r\n                    <input type=\"password\" class=\"form-control\" formControlName=\"confirmPassword\" placeholder=\"reenter the password\">\r\n                    <span class=\"glyphicon form-control-feedback\" [ngClass]=\"{'glyphicon-ok': (userForm.controls.confirmPassword.value == userForm.controls.password.value) && userForm.controls.confirmPassword.value!=null?userForm.controls.confirmPassword.value.length>0:false,'glyphicon-remove':(userForm.controls.confirmPassword.value != userForm.controls.password.value)}\"></span>\r\n                </div>\r\n                <!-- The hasError method can work with the built in validators but custom validators as well -->\r\n                <div *ngIf=\"userForm.controls.confirmPassword.hasError('MatchPassword')\" class=\"alert alert-danger \">Passwords must be identical</div>\r\n            </div> \r\n            <div *ngFor=\"let e of errors\" class=\"alert alert-danger \">\r\n                {{e}}\r\n            </div>                          \r\n            <button type=\"submit\"\r\n            [disabled]=\"!userForm.valid || userForm.pristine\" class=\"btn btn-success\">Save\r\n            <span *ngIf=\"submitting\" class=\"glyphicon glyphicon-refresh glyphicon-refresh-animate\"></span>    \r\n            </button> &nbsp;\r\n            <button type=\"reset\" (click)=\"revert()\"\r\n            [disabled]=\"userForm.pristine\" class=\"btn btn-danger\">Revert</button>\r\n            <button  *ngIf=\"user!=null && user.userId!=null\" type=\"button\" (click)=\"addNewUser();\"\r\n                class=\"pull-right btn btn-warning\">New <span class=\"glyphicon glyphicon glyphicon-user\" ></span></button>\r\n        </form>\r\n    </div>\r\n</div>"
+module.exports = "<div *ngIf=\"user==null\" class=\"alert alert-info \">Loading user info <span class=\"glyphicon glyphicon-refresh glyphicon-refresh-animate\"></span></div>\r\n<div *ngIf=\"user!=null\" class=\"card border-primary\">\r\n    <div class=\"card-header text-white bg-primary \">\r\n        <span *ngIf=\"user!=null && user.userId!=null\">Editing User {{user.userId}}</span>\r\n        <span *ngIf=\"user==null || user.userId==null\">Adding a new User</span>\r\n    </div>\r\n    <div class=\"card-block\">\r\n        <div class=\"form-group p-2\">\r\n            <form [formGroup]=\"userForm\" (ngSubmit)=\"onSubmit()\" novalidate>\r\n                <input type=\"hidden\" formControlName=\"userId\">\r\n              \r\n                    <label class=\"col-form-label\" for=\"username\">User Name</label>\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\" [ngClass]=\"{'alert-danger': !userForm.controls.username.valid,'alert-success': userForm.controls.username.valid}\">\r\n                            <i class=\"fa fa-user\" aria-hidden=\"true\"></i>\r\n                        </span>\r\n                        <input class=\"form-control form-control-sm\" formControlName=\"username\" placeholder=\"enter a user name\" \r\n                            [ngClass]=\"{'is-invalid':!userForm.controls.username.valid,'is-valid':userForm.controls.username.valid}\">\r\n                    </div>\r\n                    <div *ngIf=\"userForm.controls.username.hasError('CheckingDuplicatedItem')\" class=\"alert alert-info \">\r\n                            <i class=\"fa fa-cog fa-spin fa-fw\"></i><span class=\"sr-only\">Checking userID</span>\r\n                            Checking if username exists \r\n                    </div>\r\n                    <!-- The hasError method can work with the built in validators but custom validators as well -->\r\n                    <div *ngIf=\"userForm.controls.username.hasError('required')\" class=\"validation-error-message\">You must include a username.</div>\r\n                    <div *ngIf=\"userForm.controls.username.hasError('minlength')\" class=\"validation-error-message\">Your username must be at least 5 characters long.</div>\r\n                    <div *ngIf=\"userForm.controls.username.hasError('maxlength')\" class=\"validation-error-message\">Your username cannot exceed 10 characters.</div>\r\n                    <div *ngIf=\"userForm.controls.username.hasError('DuplicatedItem') && userForm.controls.username.value\" class=\"validation-error-message\">username already exists</div>\r\n\r\n                    <label class=\"col-form-label\" for=\"name\">Full Name</label>\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\" [ngClass]=\"{'alert-danger': !userForm.controls.name.valid,'alert-success': userForm.controls.name.valid}\">\r\n                            <i class=\"fa fa-user\" aria-hidden=\"true\"></i>\r\n                        </span>\r\n                        <input class=\"form-control form-control-sm \" formControlName=\"name\" placeholder=\"enter full name\"\r\n                        [ngClass]=\"{'is-invalid':!userForm.controls.name.valid,'is-valid':userForm.controls.name.valid}\">\r\n                    </div>\r\n                    <!-- The hasError method can work with the built in validators but custom validators as well -->\r\n                    <div *ngIf=\"userForm.controls.name.hasError('required')\" class=\"validation-error-message\">You must include a full name.</div>\r\n                    <div *ngIf=\"userForm.controls.name.hasError('minlength')\" class=\"validation-error-message\">Your name must be at least 5 characters long.</div>\r\n                    <div *ngIf=\"userForm.controls.name.hasError('maxlength')\" class=\"validation-error-message\">Your name cannot exceed 10 characters.</div>\r\n\r\n                    <label class=\"col-form-label\" for=\"address\">address</label>\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\" [ngClass]=\"{'alert-danger': !userForm.controls.address.valid,'alert-success': userForm.controls.address.valid}\">\r\n                            <i class=\"fa fa-home\" aria-hidden=\"true\"></i>\r\n                        </span>\r\n                        <input class=\"form-control form-control-sm \" formControlName=\"address\" placeholder=\"enter an address\"\r\n                        [ngClass]=\"{'is-invalid':!userForm.controls.address.valid,'is-valid':userForm.controls.address.valid}\">\r\n                    </div>\r\n                    <!-- The hasError method can work with the built in validators but custom validators as well -->\r\n                    <div *ngIf=\"userForm.controls.address.hasError('required')\" class=\"validation-error-message\">You must include an address.</div>\r\n\r\n                    <label class=\"col-form-label\" for=\"city\">city</label>\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\" [ngClass]=\"{'alert-danger': !userForm.controls.city.valid,'alert-success': userForm.controls.city.valid}\">\r\n                            <i class=\"fa fa-map-marker\" aria-hidden=\"true\"></i>\r\n                        </span>\r\n                        <input class=\"form-control form-control-sm\" formControlName=\"city\" placeholder=\"enter a city\"\r\n                        [ngClass]=\"{'is-invalid':!userForm.controls.city.valid,'is-valid':userForm.controls.city.valid}\">\r\n                    </div>\r\n                    <!-- The hasError method can work with the built in validators but custom validators as well -->\r\n                    <div *ngIf=\"userForm.controls.city.hasError('required')\" class=\"validation-error-message\">You must include a city.</div>\r\n\r\n                    <label class=\"col-form-label\" for=\"phone\">phone</label>\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\" [ngClass]=\"{'alert-danger': !userForm.controls.phone.valid,'alert-success': userForm.controls.phone.valid}\">\r\n                            <i class=\"fa fa-phone\" aria-hidden=\"true\"></i>\r\n                        </span>\r\n                        <input class=\"form-control form-control-sm\" formControlName=\"phone\" placeholder=\"enter a phone number\"\r\n                        [ngClass]=\"{'is-invalid':!userForm.controls.phone.valid,'is-valid':userForm.controls.phone.valid}\">\r\n                    </div>\r\n                    <!-- The hasError method can work with the built in validators but custom validators as well -->\r\n                    <div *ngIf=\"userForm.controls.phone.hasError('required')\" class=\"validation-error-message\">You must include a phone number.</div>\r\n                    <div *ngIf=\"userForm.controls.phone.hasError('pattern') && userForm.controls.phone.value\" class=\"validation-error-message\">Phone number is made of 9 digits</div>\r\n\r\n                    <label class=\"col-form-label\" for=\"email\">Email</label>\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\" [ngClass]=\"{'alert-danger': !userForm.controls.email.valid,'alert-success': userForm.controls.email.valid}\">\r\n                            @\r\n                        </span>\r\n                        <input class=\"form-control form-control-sm\" formControlName=\"email\" placeholder=\"enter an email\"\r\n                        [ngClass]=\"{'is-invalid':!userForm.controls.email.valid,'is-valid':userForm.controls.email.valid}\">\r\n                    </div>\r\n                    <div *ngIf=\"userForm.controls.email.hasError('CheckingDuplicatedItem')\" class=\"alert alert-info \">Checking if email exists <span class=\"glyphicon glyphicon-refresh glyphicon-refresh-animate\"></span></div>\r\n                    <!-- The hasError method can work with the built in validators but custom validators as well -->\r\n                    <div *ngIf=\"userForm.controls.email.hasError('required')\" class=\"validation-error-message\">You must include a user email.</div>\r\n                    <div *ngIf=\"userForm.controls.email.hasError('email') && userForm.controls.email.value\" class=\"validation-error-message\">Your user email is not valid</div>\r\n                    <div *ngIf=\"userForm.controls.email.hasError('DuplicatedItem') && userForm.controls.email.value\" class=\"validation-error-message\">Email already exists</div>\r\n\r\n                    <label class=\"col-form-label\" for=\"password\">Password</label>\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\" [ngClass]=\"{'alert-danger': !userForm.controls.password.valid,'alert-success': userForm.controls.password.valid}\">\r\n                            <i class=\"fa fa-lock\" aria-hidden=\"true\"></i>\r\n                        </span>\r\n                        <input type=\"password\" class=\"form-control form-control-sm\" formControlName=\"password\" placeholder=\"enter a password\"\r\n                        [ngClass]=\"{'is-invalid':!userForm.controls.password.valid,'is-valid':userForm.controls.password.valid}\">\r\n                    </div>\r\n                    <!-- The hasError method can work with the built in validators but custom validators as well -->\r\n                    <div *ngIf=\"userForm.controls.password.hasError('required')\" class=\"validation-error-message\">You must include a password</div>\r\n                    <div *ngIf=\"userForm.controls.password.hasError('pattern')\" class=\"validation-error-message\">Password length must be at least 8 chars, 1 Uppercase letter, 1 Lowercase letter and 1 digit</div>\r\n\r\n                    <label class=\"col-form-label\" for=\"confirmPassword\">Confirm Password</label>\r\n                    <div class=\"input-group\">\r\n                        <span class=\"input-group-addon\" [ngClass]=\"{'alert-danger': !userForm.controls.confirmPassword.valid,'alert-success': userForm.controls.confirmPassword.valid}\">\r\n                            <i class=\"fa fa-lock\" aria-hidden=\"true\"></i>\r\n                        </span>\r\n                        <input type=\"password\" class=\"form-control form-control-sm\" formControlName=\"confirmPassword\" placeholder=\"reenter the password\"\r\n                        [ngClass]=\"{'is-invalid':!userForm.controls.confirmPassword.valid,'is-valid':userForm.controls.confirmPassword.valid}\">\r\n                    </div>\r\n                    <!-- The hasError method can work with the built in validators but custom validators as well -->\r\n                    <div *ngIf=\"userForm.controls.confirmPassword.hasError('MatchPassword')\" class=\"validation-error-message\">Passwords must be identical</div>\r\n\r\n                <div *ngFor=\"let e of errors\" class=\"validation-error-message\">\r\n                    {{e}}\r\n                </div>     \r\n                <div class=\"m-2\">\r\n                    <button type=\"submit\"\r\n                    [disabled]=\"!userForm.valid || userForm.pristine\" class=\"btn btn-success\">Save\r\n                    <span *ngIf=\"submitting\" class=\"glyphicon glyphicon-refresh glyphicon-refresh-animate\"></span>    \r\n                    </button> &nbsp;\r\n                    <button type=\"reset\" (click)=\"revert()\"\r\n                    [disabled]=\"userForm.pristine\" class=\"btn btn-danger\">Revert</button>\r\n                    <button  *ngIf=\"user!=null && user.userId!=null\" type=\"button\" (click)=\"addNewUser();\"\r\n                        class=\"pull-right btn btn-warning\">New <span class=\"glyphicon glyphicon glyphicon-user\" ></span></button>\r\n                </div>\r\n            </form>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
-/***/ 159:
+/***/ 163:
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div  class=\"panel panel-primary\">    \r\n    <div class=\"panel-heading\">\r\n        <h3 class=\"panel-title text-center\">Users \r\n            <button class=\"btn btn-success btn-xs clickable filter pull-right\" data-toggle=\"tooltip\" title=\"Show Filter\" (click)=\"showFilterBox=!showFilterBox;\">\r\n                &nbsp;<span class=\"glyphicon glyphicon-filter\"></span>&nbsp;\r\n            </button>\r\n        </h3>\r\n    </div>\r\n    <div class=\"panel-body\" [hidden]=\"!showFilterBox\">\r\n        \r\n            <div class=\"form-group\" >\r\n                <div class=\"col-sm-11 col-xs-10\">\r\n                    <input type=\"text\" class=\"form-control\" #filterControl (keyup)=\"0\"   placeholder=\"Enter the text to search\"/>\r\n                </div>\r\n                <button type=\"button\" class=\"btn btn-primary col-sm-1 col-xs-1 text-center\"><span class=\"glyphicon glyphicon-search\"></span></button>\r\n            </div>\r\n        </div> \r\n        <div class=\"table-responsive\">         \r\n            <table class=\"table table-striped table-hover\">\r\n                <thead class=\"thead-inverse\">\r\n                    <th><button class=\"btn-block btn-link\" (click)=\"sortingByColumn('userId')\">ID\r\n                            <span class=\"glyphicon  pull-right \" \r\n                            [ngClass]=\"{'glyphicon-sort greyText': sortedByFieldName!='userId', 'glyphicon-sort-by-attributes': sortedByFieldName=='userId' && ascendingOrder, 'glyphicon-sort-by-attributes-alt': sortedByFieldName=='userId' && !ascendingOrder}\"></span>\r\n                        </button>\r\n                    </th>\r\n                    <th><button class=\"btn-block btn-link\" (click)=\"sortingByColumn('username')\">Name\r\n                            <span class=\"glyphicon  pull-right \" \r\n                            [ngClass]=\"{'glyphicon-sort greyText': sortedByFieldName!='username', 'glyphicon-sort-by-attributes': sortedByFieldName=='username' && ascendingOrder, 'glyphicon-sort-by-attributes-alt': sortedByFieldName=='username' && !ascendingOrder}\"></span>\r\n                        </button>\r\n                    </th>\r\n                    <th><button class=\"btn-block btn-link\" (click)=\"sortingByColumn('name')\">Full name\r\n                        <span class=\"glyphicon  pull-right \" \r\n                            [ngClass]=\"{'glyphicon-sort greyText': sortedByFieldName!='name', 'glyphicon-sort-by-attributes': sortedByFieldName=='name' && ascendingOrder, 'glyphicon-sort-by-attributes-alt': sortedByFieldName=='name' && !ascendingOrder}\"></span>\r\n                        </button>\r\n                    </th>\r\n                    <th><button class=\"btn-block btn-link\" (click)=\"sortingByColumn('address')\">Address\r\n                        <span class=\"glyphicon  pull-right \" \r\n                            [ngClass]=\"{'glyphicon-sort greyText': sortedByFieldName!='address', 'glyphicon-sort-by-attributes': sortedByFieldName=='address' && ascendingOrder, 'glyphicon-sort-by-attributes-alt': sortedByFieldName=='address' && !ascendingOrder}\"></span>\r\n                        </button>\r\n                    </th>\r\n                    <th><button class=\"btn-block btn-link\" (click)=\"sortingByColumn('city')\">City\r\n                        <span class=\"glyphicon  pull-right \" \r\n                            [ngClass]=\"{'glyphicon-sort greyText': sortedByFieldName!='city', 'glyphicon-sort-by-attributes': sortedByFieldName=='city' && ascendingOrder, 'glyphicon-sort-by-attributes-alt': sortedByFieldName=='city' && !ascendingOrder}\"></span>\r\n                        </button>\r\n                    </th>\r\n                    <th><button class=\"btn-block btn-link\" (click)=\"sortingByColumn('phone')\">Phone\r\n                        <span class=\"glyphicon  pull-right \" \r\n                            [ngClass]=\"{'glyphicon-sort greyText': sortedByFieldName!='phone', 'glyphicon-sort-by-attributes': sortedByFieldName=='phone' && ascendingOrder, 'glyphicon-sort-by-attributes-alt': sortedByFieldName=='phone' && !ascendingOrder}\"></span>\r\n                        </button>\r\n                    </th>\r\n                    <th><button class=\"btn-block btn-link\" (click)=\"sortingByColumn('email')\">Email\r\n                        <span class=\"glyphicon  pull-right \" \r\n                            [ngClass]=\"{'glyphicon-sort greyText': sortedByFieldName!='email', 'glyphicon-sort-by-attributes': sortedByFieldName=='email' && ascendingOrder, 'glyphicon-sort-by-attributes-alt': sortedByFieldName=='email' && !ascendingOrder}\"></span>\r\n                        </button>\r\n                    </th>\r\n                    <th></th>\r\n                </thead>\r\n                <tbody *ngIf=\"users==null\">\r\n                    <tr>\r\n                        <td colspan=8 class=\"alert alert-info text-center\">\r\n                            Loading users info <span class=\"glyphicon glyphicon-refresh glyphicon-refresh-animate\"></span>\r\n                        </td>\r\n                    </tr>\r\n                </tbody>\r\n                <tbody *ngIf=\"users!=null || true\" >\r\n                    <tr *ngFor='let user of users | async | filterby : filterControl.value | sortby : sortedByFieldName : ascendingOrder'>\r\n                        <td>{{user.userId}}</td>\r\n                        <td>{{user.username}}</td>\r\n                        <td>{{user.name}}</td>\r\n                        <td>{{user.address}}</td>\r\n                        <td>{{user.city}}</td>\r\n                        <td>{{user.phone}}</td>\r\n                        <td>{{user.email}}</td>\r\n                        <td>\r\n                            <button type=\"button\" class=\"btn btn-link\" title=\"edit\" (click)=\"userFormTableService.editingItem(user.userId)\" ><span role=\"button\" aria-hidden=\"true\" class=\"glyphicon glyphicon glyphicon-pencil\" ></span></button>\r\n                            <button type=\"button\" class=\"btn btn-link\" title=\"remove\" (click)=\"showRemoveModalDlg(user)\">  <span class=\"text-danger glyphicon glyphicon glyphicon-remove\" ></span></button>\r\n                        </td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n            \r\n        </div>\r\n</div>\r\n     <app-modal>\r\n    </app-modal>\r\n    \r\n"
+module.exports = "\r\n<div  class=\"card border-primary\">    \r\n    <div class=\"card-header text-white bg-primary \">\r\n        <h3 class=\"panel-title text-center\">Users \r\n            <button class=\"btn btn-success btn-xs clickable filter pull-right\" data-toggle=\"tooltip\" title=\"Show Filter\" (click)=\"showFilterBox=!showFilterBox;\">\r\n                &nbsp;<i class=\"fa fa-filter\" aria-hidden=\"true\"></i>&nbsp;\r\n            </button>\r\n        </h3>\r\n    </div>\r\n    <div class=\"card-block\" [hidden]=\"!showFilterBox\">\r\n            <div class=\"input-group col-10 m-2\">\r\n                <input type=\"text\" class=\"form-control\" #filterControl (keyup)=\"0\"   placeholder=\"Enter the text to search\"/>\r\n                <span class=\"input-group-btn\">\r\n                        <button type=\"button\" class=\"btn btn-primary text-center\"><i class=\"fa fa-search\" aria-hidden=\"true\"></i></button>\r\n                </span>\r\n            </div>\r\n                \r\n    </div>\r\n    <div class=\"table-responsive\">         \r\n        <table class=\"table\">\r\n            <thead class=\"thead-inverse\">\r\n                <th  (click)=\"sortingByColumn('userId')\"><button class=\"btn btn-link\" >ID\r\n                        <i *ngIf=\"sortedByFieldName=='userId' && !ascendingOrder\" class=\"fa fa-sort-alpha-desc\" aria-hidden=\"true\"></i>\r\n                        <i *ngIf=\"sortedByFieldName=='userId' && ascendingOrder\" class=\"fa fa-sort-alpha-asc\" aria-hidden=\"true\"></i>\r\n                </button>\r\n                </th>\r\n                <th><button class=\"btn btn-link\" (click)=\"sortingByColumn('username')\">Name\r\n                        <i *ngIf=\"sortedByFieldName=='username' && !ascendingOrder\" class=\"fa fa-sort-alpha-desc\" aria-hidden=\"true\"></i>\r\n                        <i *ngIf=\"sortedByFieldName=='username' && ascendingOrder\" class=\"fa fa-sort-alpha-asc\" aria-hidden=\"true\"></i>\r\n                    </button>\r\n                </th>\r\n                <th><button class=\"btn btn-link\" (click)=\"sortingByColumn('name')\">Full name\r\n                        <i *ngIf=\"sortedByFieldName=='name' && !ascendingOrder\" class=\"fa fa-sort-alpha-desc\" aria-hidden=\"true\"></i>\r\n                        <i *ngIf=\"sortedByFieldName=='name' && ascendingOrder\" class=\"fa fa-sort-alpha-asc\" aria-hidden=\"true\"></i>\r\n                    </button>\r\n                </th>\r\n                <th><button class=\"btn btn-link\" (click)=\"sortingByColumn('address')\">Address\r\n                        <i *ngIf=\"sortedByFieldName=='address' && !ascendingOrder\" class=\"fa fa-sort-alpha-desc\" aria-hidden=\"true\"></i>\r\n                        <i *ngIf=\"sortedByFieldName=='address' && ascendingOrder\" class=\"fa fa-sort-alpha-asc\" aria-hidden=\"true\"></i>\r\n                    </button>\r\n                </th>\r\n                <th><button class=\"btn btn-link\" (click)=\"sortingByColumn('city')\">City\r\n                        <i *ngIf=\"sortedByFieldName=='city' && !ascendingOrder\" class=\"fa fa-sort-alpha-desc\" aria-hidden=\"true\"></i>\r\n                        <i *ngIf=\"sortedByFieldName=='city' && ascendingOrder\" class=\"fa fa-sort-alpha-asc\" aria-hidden=\"true\"></i>\r\n                    </button>\r\n                </th>\r\n                <th><button class=\"btn btn-link\" (click)=\"sortingByColumn('phone')\">Phone\r\n                        <i *ngIf=\"sortedByFieldName=='phone' && !ascendingOrder\" class=\"fa fa-sort-alpha-desc\" aria-hidden=\"true\"></i>\r\n                        <i *ngIf=\"sortedByFieldName=='phone' && ascendingOrder\" class=\"fa fa-sort-alpha-asc\" aria-hidden=\"true\"></i>\r\n                    </button>\r\n                </th>\r\n                <th><button class=\"btn btn-link\" (click)=\"sortingByColumn('email')\">Email\r\n                        <i *ngIf=\"sortedByFieldName=='email' && !ascendingOrder\" class=\"fa fa-sort-alpha-desc\" aria-hidden=\"true\"></i>\r\n                        <i *ngIf=\"sortedByFieldName=='email' && ascendingOrder\" class=\"fa fa-sort-alpha-asc\" aria-hidden=\"true\"></i>\r\n                    </button>\r\n                </th>\r\n                <th></th>\r\n            </thead>\r\n            <tbody *ngIf=\"users==null\">\r\n                <tr>\r\n                    <td colspan=8 class=\"alert alert-info text-center\">\r\n                        Loading users info <span class=\"glyphicon glyphicon-refresh glyphicon-refresh-animate\"></span>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n            <tbody *ngIf=\"users!=null || true\" >\r\n                <tr *ngFor='let user of users | async | filterby : filterControl.value | sortby : sortedByFieldName : ascendingOrder'>\r\n                    <td>{{user.userId}}</td>\r\n                    <td>{{user.username}}</td>\r\n                    <td>{{user.name}}</td>\r\n                    <td>{{user.address}}</td>\r\n                    <td>{{user.city}}</td>\r\n                    <td>{{user.phone}}</td>\r\n                    <td>{{user.email}}</td>\r\n                    <td>\r\n                        <button type=\"button\" class=\"btn btn-link\" title=\"edit\" (click)=\"userFormTableService.editingItem(user.userId)\" >\r\n                                <i class=\"fa fa-edit text-green\" aria-hidden=\"true\"></i>\r\n                        </button>\r\n                        <button type=\"button\" class=\"btn btn-link text-red\" title=\"remove\" (click)=\"showRemoveModalDlg(user)\"> \r\n                                <i class=\"fa fa-remove\" aria-hidden=\"true\"></i>\r\n                        </button>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </div>\r\n\r\n</div>\r\n     <app-modal>\r\n    </app-modal>\r\n    \r\n"
 
 /***/ }),
 
-/***/ 203:
+/***/ 217:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(84);
+module.exports = __webpack_require__(88);
 
 
 /***/ }),
 
-/***/ 32:
+/***/ 35:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_observable_of__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_observable_of__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_observable_of__);
 /* harmony export (immutable) */ __webpack_exports__["a"] = getLocalStorageUsers;
 /* harmony export (immutable) */ __webpack_exports__["d"] = saveLocalStorageUser;
@@ -127,12 +411,12 @@ function readFromLocalStorageUser(userId) {
 
 /***/ }),
 
-/***/ 33:
+/***/ 36:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserFormTableService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -169,21 +453,21 @@ UserFormTableService = __decorate([
 
 /***/ }),
 
-/***/ 34:
+/***/ 37:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(174);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__ = __webpack_require__(75);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_catch__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__ = __webpack_require__(168);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__ = __webpack_require__(172);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_observable_throw__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_observable_throw__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_observable_throw___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_add_observable_throw__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -307,12 +591,12 @@ var _a;
 
 /***/ }),
 
-/***/ 56:
+/***/ 58:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ModalComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -326,36 +610,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-//import {Observable} from 'rxjs/Observable';
 var ModalComponent = (function () {
     function ModalComponent() {
         this.clickStream = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["Subject"]();
-        //private clickStream = new Observable<boolean>();
         this.blnResult = this.clickStream.asObservable();
-        //@Output() observable = this.clickStream;
-        this.visible = false;
-        this.visibleAnimate = true;
     }
     ModalComponent.prototype.show = function (strHeader, strBody) {
-        var _this = this;
         this.modalHeader = strHeader;
         this.modalBody = strBody;
-        this.visible = true;
-        setTimeout(function () { return _this.visibleAnimate = true; }, 100);
+        $('div.modal').modal('show');
     };
     ModalComponent.prototype.hide = function () {
-        var _this = this;
-        this.visibleAnimate = false;
-        setTimeout(function () { return _this.visible = false; }, 300);
+        $('div.modal').modal('hide');
     };
     ModalComponent.prototype.doit = function () {
-        //this.clickStream = new Observable((observer:any)  => observer.next(true));
         this.clickStream.next(true);
         this.hide();
     };
     ModalComponent.prototype.nodoit = function () {
         this.clickStream.next(false);
-        //this.clickStream = new Observable((observer:any)  => observer.next(false));
         this.hide();
     };
     ModalComponent.prototype.onContainerClicked = function (event) {
@@ -372,7 +645,7 @@ __decorate([
 ModalComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* Component */])({
         selector: 'app-modal',
-        template: "\n  <div (click)=\"onContainerClicked($event)\" class=\"modal fade\" tabindex=\"-1\" [ngClass]=\"{'in': visibleAnimate}\"\n       [ngStyle]=\"{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}\">\n    <div class=\"modal-dialog\">\n      <div class=\"modal-content\" >\n        <div class=\"modal-header\" >\n            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" (click)=\"hide()\">&times;</button>\n          <h4 >{{modalHeader}}</h4>\n        </div>\n        <div class=\"modal-body\" [innerHTML]=modalBody>\n        </div>\n        <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-default\" (click)=\"nodoit()\">No</button>\n            <button type=\"button\" class=\"btn btn-primary\" (click)=\"doit()\">Yes</button>\n        </div>\n      </div>\n    </div>\n  </div>\n  "
+        template: "\n  <div (click)=\"onContainerClicked($event)\" class=\"modal fade\" [ngClass]=\"{'show': visibleAnimate}\" tabindex=\"-1\">\n    <div class=\"modal-dialog\">\n      <div class=\"modal-content\" >\n        <div class=\"modal-header\" >\n          <h4 >{{modalHeader}}</h4>\n          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" (click)=\"hide()\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n        </div>\n        <div class=\"modal-body\" [innerHTML]=modalBody>\n        </div>\n        <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-default\" (click)=\"nodoit()\">No</button>\n            <button type=\"button\" class=\"btn btn-primary\" (click)=\"doit()\">Yes</button>\n        </div>\n      </div>\n    </div>\n  </div>\n  "
     })
 ], ModalComponent);
 
@@ -380,7 +653,7 @@ ModalComponent = __decorate([
 
 /***/ }),
 
-/***/ 57:
+/***/ 59:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -413,7 +686,7 @@ var User = (function () {
 
 /***/ }),
 
-/***/ 83:
+/***/ 87:
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -422,20 +695,20 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 83;
+webpackEmptyContext.id = 87;
 
 
 /***/ }),
 
-/***/ 84:
+/***/ 88:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(88);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(104);
 
 
 
@@ -448,7 +721,7 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 /***/ }),
 
-/***/ 89:
+/***/ 93:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -470,7 +743,7 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* Component */])({
         selector: 'my-app',
-        template: __webpack_require__(157)
+        template: __webpack_require__(161)
     })
 ], AppComponent);
 
@@ -478,26 +751,26 @@ AppComponent = __decorate([
 
 /***/ }),
 
-/***/ 90:
+/***/ 94:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular_in_memory_web_api__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__users_in_memory_data_service__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__not_found_component__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__users_user_main_component__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__users_user_form_component__ = __webpack_require__(97);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__users_users_table_component__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__users_user_service__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__users_user_form_table_communication_service__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__shared_filterby_pipe__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__shared_sortby_pipe__ = __webpack_require__(93);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__shared_modal_component__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular_in_memory_web_api__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__users_in_memory_data_service__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__not_found_component__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__users_user_main_component__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__users_user_form_component__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__users_users_table_component__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__users_user_service__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__users_user_form_table_communication_service__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__shared_filterby_pipe__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__shared_sortby_pipe__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__shared_modal_component__ = __webpack_require__(58);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -570,7 +843,7 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 91:
+/***/ 95:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -598,7 +871,7 @@ PageNotFoundComponent = __decorate([
 
 /***/ }),
 
-/***/ 92:
+/***/ 96:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -635,7 +908,7 @@ FilterByPipe = __decorate([
 
 /***/ }),
 
-/***/ 93:
+/***/ 97:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -691,11 +964,11 @@ SortByPipe = __decorate([
 
 /***/ }),
 
-/***/ 94:
+/***/ 98:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shared_user__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shared_user__ = __webpack_require__(59);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InMemoryDataService; });
 
 var InMemoryDataService = (function () {
@@ -719,13 +992,13 @@ var InMemoryDataService = (function () {
 
 /***/ }),
 
-/***/ 95:
+/***/ 99:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_observable_of__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_observable_of__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_rxjs_add_observable_of__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__users_localstorage__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__users_localstorage__ = __webpack_require__(35);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AsyncUniqueFieldValidator; });
 
 
@@ -759,291 +1032,7 @@ var AsyncUniqueFieldValidator = function (itemId, userobjectService, fieldname) 
 };
 //# sourceMappingURL=async-unique-field.validator.js.map
 
-/***/ }),
-
-/***/ 96:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = matchingPasswords;
-// FORM GROUP VALIDATORS
-function matchingPasswords() {
-    return function (group) {
-        var passwordControl = group.controls['password'];
-        var confirmPasswordControl = group.controls['confirmPassword'];
-        var password = passwordControl.value; // to get value in input tag
-        var confirmPassword = confirmPasswordControl.value; // to get value in input tag
-        if (password != confirmPassword) {
-            confirmPasswordControl.setErrors({ MatchPassword: true });
-        }
-        else {
-            confirmPasswordControl.setErrors(null);
-            return null;
-        }
-    };
-}
-//# sourceMappingURL=password.validator.js.map
-
-/***/ }),
-
-/***/ 97:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap__ = __webpack_require__(169);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_switchMap__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_user__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_password_validator__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_async_unique_field_validator__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_users_localstorage__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__user_service__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__user_form_table_communication_service__ = __webpack_require__(33);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserFormComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-//import { Router, ActivatedRoute, Params } from '@angular/router';
-
-
-
-
-
-
-
-var UserFormComponent = (function () {
-    function UserFormComponent(userService, fb, 
-        //private route: ActivatedRoute, private router: Router,
-        userFormTableService) {
-        var _this = this;
-        this.userService = userService;
-        this.fb = fb;
-        this.userFormTableService = userFormTableService;
-        this.errors = [];
-        this.submitting = false;
-        this.onSubmitted = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]();
-        this.user = new __WEBPACK_IMPORTED_MODULE_3__shared_user__["a" /* User */]();
-        userFormTableService.editingItemInList$.subscribe(function (userId) {
-            _this.user = null;
-            _this.userService.getUser(userId).subscribe(function (user) {
-                if (userId != null && !isNaN(userId)) {
-                    _this.user = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__shared_users_localstorage__["c" /* readFromLocalStorageUser */])(userId);
-                }
-                if (_this.user == null) {
-                    _this.user = new __WEBPACK_IMPORTED_MODULE_3__shared_user__["a" /* User */]();
-                }
-                _this.revert();
-            });
-        });
-    }
-    UserFormComponent.prototype.createForm = function () {
-        this.userForm = this.fb.group({
-            userId: [null],
-            name: [null, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].minLength(5), __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].maxLength(90)])],
-            username: [null, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].minLength(5), __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].maxLength(25)])],
-            address: [null, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].maxLength(80)])],
-            city: [null, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].maxLength(50)])],
-            phone: [null, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].pattern('^\\d{9}$')])],
-            email: [null, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].email])],
-            password: [null],
-            confirmPassword: [null]
-        }, {
-            validator: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__shared_password_validator__["a" /* matchingPasswords */])() // your validation method
-        });
-    };
-    UserFormComponent.prototype.addNewUser = function () {
-        this.user = new __WEBPACK_IMPORTED_MODULE_3__shared_user__["a" /* User */]();
-        this.revert();
-    };
-    UserFormComponent.prototype.revert = function () {
-        this.userForm.reset(this.user);
-        this.userForm.controls['email'].setAsyncValidators(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__shared_async_unique_field_validator__["a" /* AsyncUniqueFieldValidator */])(this.user.userId, this.userService, "email"));
-        this.userForm.controls['email'].updateValueAndValidity();
-        this.userForm.controls['username'].setAsyncValidators(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__shared_async_unique_field_validator__["a" /* AsyncUniqueFieldValidator */])(this.user.userId, this.userService, "username"));
-        this.userForm.controls['username'].updateValueAndValidity();
-        if (this.userForm.controls['password']) {
-            if (this.user == null || this.user.userId == null) {
-                this.userForm.controls['password'].setValidators(__WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* Validators */].pattern('^((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,})$')]));
-            }
-            else {
-                this.userForm.controls['password'].setValidators(null);
-            }
-            this.userForm.controls['password'].updateValueAndValidity();
-        }
-    };
-    UserFormComponent.prototype.ngOnInit = function () {
-        this.createForm();
-        this.revert();
-    };
-    UserFormComponent.prototype.onSubmit = function () {
-        var _this = this;
-        this.errors = [];
-        this.submitting = true;
-        if (this.userForm.valid) {
-            this.userService.save(this.userForm.value).subscribe(function (user) {
-                __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__shared_users_localstorage__["d" /* saveLocalStorageUser */])(user);
-                _this.submitting = false;
-                _this.userFormTableService.updatedItem();
-                _this.addNewUser();
-            }, function (error) { _this.errors.push(error), _this.submitting = false; });
-        }
-    };
-    return UserFormComponent;
-}());
-__decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Output */])(),
-    __metadata("design:type", Object)
-], UserFormComponent.prototype, "onSubmitted", void 0);
-UserFormComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* Component */])({
-        selector: 'user-form',
-        template: __webpack_require__(158)
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_7__user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__user_service__["a" /* UserService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormBuilder */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_8__user_form_table_communication_service__["a" /* UserFormTableService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__user_form_table_communication_service__["a" /* UserFormTableService */]) === "function" && _c || Object])
-], UserFormComponent);
-
-var _a, _b, _c;
-//# sourceMappingURL=user-form.component.js.map
-
-/***/ }),
-
-/***/ 98:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserMainComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-var UserMainComponent = (function () {
-    function UserMainComponent() {
-    }
-    return UserMainComponent;
-}());
-UserMainComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* Component */])({
-        template: "\n            <div class=\"row\">\n                <div class=\"col-sm-5\">\n                    <user-form></user-form>\n                </div>\n                <div class=\"col-sm-7\">\n                    <user-table></user-table>\n                </div>\n            <div>\n            "
-    })
-], UserMainComponent);
-
-//# sourceMappingURL=user-main.component.js.map
-
-/***/ }),
-
-/***/ 99:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_observable_of__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_observable_of__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_catch__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_catch__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_debounceTime__ = __webpack_require__(165);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_debounceTime___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_debounceTime__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_distinctUntilChanged__ = __webpack_require__(167);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_distinctUntilChanged___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_distinctUntilChanged__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__user_service__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_users_localstorage__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__user_form_table_communication_service__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_modal_component__ = __webpack_require__(56);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UsersTableComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-// Observable class extensions
-
-// Observable operators
-
-
-
-
-
-
-
-var UsersTableComponent = (function () {
-    function UsersTableComponent(userService, 
-        //private router: Router, 
-        userFormTableService) {
-        var _this = this;
-        this.userService = userService;
-        this.userFormTableService = userFormTableService;
-        this.showFilterBox = false;
-        this.sortedByFieldName = "userId";
-        this.ascendingOrder = true;
-        userFormTableService.updatedItemInList$.subscribe(function (isDone) {
-            if (isDone) {
-                _this.ngOnInit();
-            }
-        });
-    }
-    UsersTableComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.users = null;
-        this.userService.getUsers().subscribe(function (users) {
-            _this.users = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__shared_users_localstorage__["a" /* getLocalStorageUsers */])(users);
-        });
-    };
-    UsersTableComponent.prototype.sortingByColumn = function (fieldName) {
-        if (this.sortedByFieldName == fieldName) {
-            this.ascendingOrder = !this.ascendingOrder;
-        }
-        else {
-            this.ascendingOrder = true;
-        }
-        this.sortedByFieldName = fieldName;
-    };
-    UsersTableComponent.prototype.showRemoveModalDlg = function (userToRemove) {
-        var _this = this;
-        var infoTemplate = "\n            Do you want to remove user <strong> " + userToRemove.username + " </strong> ?\n             <dl class=\"dl-horizontal\">\n                    <dt><span class=\"glyphicon glyphicon glyphicon-user\" ></span></dt>\n                    <dd>" + userToRemove.name + "</dd>\n                    <dt><span class=\"glyphicon glyphicon glyphicon-map-marker\" ></span></dt>\n                    <dd>" + userToRemove.address + " , " + userToRemove.city + "</dd>\n                    <dt><span class=\"glyphicon glyphicon glyphicon-phone\" ></span></dt>\n                    <dd>" + userToRemove.phone + "</dd>\n                    <dt><span>@</span></dt>\n                    <dd>" + userToRemove.email + "</dd>\n            </dl>";
-        this.modal.show('Removing users', infoTemplate);
-        this.subscription = this.modal.blnResult.subscribe(function (blnRemove) {
-            if (blnRemove) {
-                _this.userService.delete(userToRemove.userId).subscribe(function (user) { __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__shared_users_localstorage__["b" /* removeLocalStorageUser */])(userToRemove.userId); _this.ngOnInit(); }, function (error) { console.log(error); });
-            }
-            // unsubscribe is necessary such that the observable doesn't keep racking up listeners
-            _this.subscription.unsubscribe();
-        });
-    };
-    return UsersTableComponent;
-}());
-__decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_2" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_8__shared_modal_component__["a" /* ModalComponent */]),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_8__shared_modal_component__["a" /* ModalComponent */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__shared_modal_component__["a" /* ModalComponent */]) === "function" && _a || Object)
-], UsersTableComponent.prototype, "modal", void 0);
-UsersTableComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* Component */])({
-        selector: 'user-table',
-        template: __webpack_require__(159)
-    }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__user_service__["a" /* UserService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_7__user_form_table_communication_service__["a" /* UserFormTableService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__user_form_table_communication_service__["a" /* UserFormTableService */]) === "function" && _c || Object])
-], UsersTableComponent);
-
-var _a, _b, _c;
-//# sourceMappingURL=users-table.component.js.map
-
 /***/ })
 
-},[203]);
+},[217]);
 //# sourceMappingURL=main.bundle.js.map

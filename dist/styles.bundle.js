@@ -1,21 +1,21 @@
 webpackJsonp([2,4],{
 
-/***/ 155:
+/***/ 159:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(156)(false);
+exports = module.exports = __webpack_require__(160)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".btn-link:focus,.btn-link:active {\n    outline: none !important;\n}\n.greyText {\n    color:\t#e2e2e2;\n}\nth {\n    text-align:center;\n}\nh1 {\n  color: #369;\n  font-family: Arial, Helvetica, sans-serif;\n  font-size: 250%;\n}\n\n.glyphicon-refresh-animate {\n    -animation: spin .7s infinite linear;\n    -ms-animation: spin .7s infinite linear;\n    -webkit-animation: spinw .7s infinite linear;\n    -moz-animation: spinm .7s infinite linear;\n}\n\n.alert {\n    padding: 0px 0px 0px 20px; \n    margin-bottom: 0px; \n}\n.form-group {\n     margin-bottom: 2px; \n}\nlabel {\n     margin-bottom: 0px; \n }\n .table td {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n\n}\n\n@-webkit-keyframes spin {\n    from { -webkit-transform: scale(1) rotate(0deg); transform: scale(1) rotate(0deg);}\n    to { -webkit-transform: scale(1) rotate(360deg); transform: scale(1) rotate(360deg);}\n}\n\n@keyframes spin {\n    from { -webkit-transform: scale(1) rotate(0deg); transform: scale(1) rotate(0deg);}\n    to { -webkit-transform: scale(1) rotate(360deg); transform: scale(1) rotate(360deg);}\n}\n  \n@-webkit-keyframes spinw {\n    from { -webkit-transform: rotate(0deg);}\n    to { -webkit-transform: rotate(360deg);}\n}\n\n", ""]);
+exports.push([module.i, ".validation-error-message {\r\n    margin-top: .25rem;\r\n    font-size: .875rem;\r\n    color: #dc3545;\r\n}\r\n\r\n.btn-link:focus,.btn-link:active {\r\n    outline: none !important;\r\n}\r\n\r\n\r\n .table td {\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n  text-overflow: ellipsis;\r\n\r\n}\r\n\r\n.col-form-label{\r\n    padding:0px;\r\n    margin:0px;\r\n}\r\n\r\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 156:
+/***/ 160:
 /***/ (function(module, exports) {
 
 /*
@@ -98,7 +98,7 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ 201:
+/***/ 215:
 /***/ (function(module, exports) {
 
 /*
@@ -351,24 +351,24 @@ function updateLink(linkElement, obj) {
 
 /***/ }),
 
-/***/ 205:
+/***/ 219:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(86);
+module.exports = __webpack_require__(90);
 
 
 /***/ }),
 
-/***/ 86:
+/***/ 90:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(155);
+var content = __webpack_require__(159);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(201)(content, {});
+var update = __webpack_require__(215)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -386,5 +386,5 @@ if(false) {
 
 /***/ })
 
-},[205]);
+},[219]);
 //# sourceMappingURL=styles.bundle.js.map

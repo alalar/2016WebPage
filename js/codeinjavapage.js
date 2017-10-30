@@ -1,151 +1,7 @@
-<!DOCTYPE html>
-<html>
-    <head>
-		<title>Showing Java experience</title>
-		<link rel="stylesheet" type="text/css" href="http://cdn.sencha.com/ext/gpl/5.0.0/build/packages/ext-theme-neptune/build/resources/ext-theme-neptune-all.css">
-		<script type="text/javascript" src="http://cdn.sencha.com/ext/gpl/5.0.0/build/ext-all.js"></script> 
-		<script type="text/javascript" src="http://cdn.sencha.com/ext/gpl/5.0.0/build/packages/ext-theme-neptune/build/ext-theme-neptune.js"></script>
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script type="text/javascript" src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
-		<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/cupertino/jquery-ui.css" />
-		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-		<link href='./css/main.css' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Arvo|Audiowide|Rock+Salt' rel='stylesheet' type='text/css'>
-	   
-		<script src='./fullcalendar/moment.min.js' type="text/javascript"></script>
-		<script src='./fullcalendar/fullcalendar.min.js' type="text/javascript"></script>
-		<link href='./fullcalendar/fullcalendar.min.css' rel='stylesheet' type='text/css'/>
-		<link href='./fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' type='text/css'/>
-		<link href='./fullcalendar/customcalendar.css' rel='stylesheet' type='text/css'/>
-		<script src='./fullcalendar/customcalendar.js' type="text/javascript"></script>	   
-	<style>
-html,body {
-        width: 100%;
-        height: 100%;
-        position: relative; 
-}
+/* code for java html page */
 
-header {
-    background: #fff; 
-    position: fixed; 
-    left: 0; top: 0; 
-    width:100%;
-    height: 76px;
-    z-index: 10; 
-}
-
-nav {
-    width: 100%;
-    height:60px;
-	padding-top:43px;
-	padding-left:50px;
-}
-
-nav ul {
-    list-style: none;
-    width: inherit; 
-    margin: 0; 
-}
-
-
-nav ul li:nth-child( 3n + 1), #main .panel:nth-child( 3n + 1) {
-    background: rgb( 0, 180, 255 );
-}
-
-nav ul li:nth-child( 3n + 2), #main .panel:nth-child( 3n + 2) {
-    background: rgb( 255, 65, 180 );
-}
-
-nav ul li:nth-child( 3n + 3), #main .panel:nth-child( 3n + 3) {
-    background: rgb(247, 177, 0);
-}
-
-nav ul li {
-    display: inline-block; 
-    margin: 0 8px;
-    margin: 0 0.5rem;
-    padding: 5px 8px;
-    padding: 0.3rem 0.5rem;
-    border-radius: 4px; 
-    line-height: 1.5;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-.panel {
-    width: 100%;
-    height: 100%;
-    z-index:0; 
-}
-
-.panel h1 {
-    font-family: sans-serif;
-    font-size: 64px;
-    font-size: 4rem;
-    color: #fff;
-    position:relative;
-    line-height: 200px;
-    top: 33%;
-    text-align: center;
-    margin: 0;
-}
-
-
-		.cssBolsa {
-			position: relative;
-			width: 95%;
-			height: auto;
-			margin: auto;
-			padding: 0px;
-			padding-top: 100px;
-		}
-		.cssBolsaChart {
-			position:relative;
-			height:400px;
-			width: 90%;
-			margin: auto;
-			border-radius: 30px;
-			padding:15px;
-			background: #FFFFFF;
-		}
-		.cssMainTitle {
-			font-size: x-large;
-			font-weight: bold;
-			text-align:center;
-			color: #FFF;
-			margin-bottom:5px;
-		}
-		.cssRadioButton {
-			text-align:center;
-		}
-		.cssLoading {
-			position: absolute;
-			height:100%;
-			width: 100%;
-			background-color:#FFFFFF;
-			background-image: url('./Imagenes/ajax-loader.gif');
-			background-repeat:no-repeat;
-			background-position: center center;
-			border-radius:15px;
-			opacity:0.7;
-			z-index: 10000;
-			}
-			
-			
-		.cssextJSExample {
-			width: 95%;
-			height: 500px;
-			margin: auto;
-			padding-top: 100px;
-		}			
-		</style>
-		
-		<script>
-		
-		function getHistoricalData(strCompanyCode) {
+ /*Code for stock info, it is not in use right now */
+ function getHistoricalData(strCompanyCode) {
 			$('#divBolsa div.cssLoading').show();
 			var url = 'http://query.yahooapis.com/v1/public/yql';
 			var infoArray = new Array(366);
@@ -283,15 +139,7 @@ nav ul li a {
 	}	
 	lstCompanies = [["YHOO","YAHOO"],["MSFT","MICROSOFT"],["AAPL","APPLE"],["IBM","IBM"],["KO","COKE"],["PEP","PEPSICO"],["TSLA","TESLA"],["BAC","BANK OF AMERICA"]];
 	strTipInfo = "Mostrar precio de accion de la empresa ";
-
-
-	 google.load("visualization", "1", {packages:["corechart"]});
-     google.setOnLoadCallback(getHistoricalDataCompanies(lstCompanies));
-	 
-	 //create the div with the loading image
-	 
-
-	  
+  
 	  function createRadioButtons(){
 			$.each(lstCompanies, function(index,value) {
 				$("#divRadio").append($('<input>').prop('type', 'radio').prop('name','radioCompanies').prop('data-value',value[0]).prop('id','radio'+index)).append($('<label>').prop('for','radio'+index).prop('title',strTipInfo + value[1]).text(value[1]));
@@ -321,21 +169,9 @@ nav ul li a {
 					}
 				 });
 	  }
-	  
-		$( document ).ready(function(){
-			$( document ).tooltip();
-			$('nav a').click(function(){
-					$('html, body').animate({
-						scrollTop: $( $(this).attr('href') ).offset().top
-					}, 500);
-					return false;
-			});
-		});
-		
-		
-		
-		
-		//=========================== BEGIN EXTJS DEMO ====================================//
+ /* End Of Code for stock info, it is not in use right now */	  
+ 
+ //=========================== BEGIN EXTJS DEMO ====================================//
 		Ext.require([
 			'Ext.data.*',
 			'Ext.tip.QuickTipManager',
@@ -590,6 +426,7 @@ nav ul li a {
 		});
 	
 		Ext.onReady(function(){
+			
 			Ext.tip.QuickTipManager.init();
 			
 			Ext.create('Ext.panel.Panel', {
@@ -636,99 +473,4 @@ nav ul li a {
 			 }
 		});
 		/// ----------------------END EXTJS DEMO ------------------------//
-		</script>
-		
-    </head>
-    <body>
-
-    <header class="nav">
-			<div class="cssTop cssTopSmall cssDivsInColumns">
-				<div class="cssName">
-					ALBERTO ALVAREZ ARBESU
-				</div>
-				<div class="cssTitle ">
-				<ul class="cssDivsInColumns cssBrilla cssIndexOptions">
-					<li><a href="./index.html">Home</a></li>
-					<li><a href="./cv.html">CV</a></li>
-				
-				</ul>
-					
-				</div>
-				<div class="cssEmail">
-					<a href="mailto:alalar@wanadoo.es">alalar@wanadoo.es</a>
-				</div>
-			</div>	
-        <nav>
-			<ul> EJEMPLOS JAVA
-				<li><a href="#bolsa">Webservice/Graphics</a></li>
-				<li><a href="#extjs">Framework ExtJs</a></li>
-				<li><a href="#calendarExample">calendar</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section id="main" style="height:100%">
-        <article class="panel" id="bolsa">
-            <div id="divBolsa" class="cssBolsa">
-				<div class="cssLoading"></div>
-				<div class="cssMainTitle" title="Usamos el Webservice de Yahoo Finance para leer la informacion de las acciones y las mostramos usando la api de graficos de Google.  We use the Yahoo finance webservice and the Google char api to show the results">Stock Market / Mostrando valores de acciones  (+info)</div>
-				<div id="divRadio" class="cssRadioButton"></div>
-				<div id="chart_div" class="cssBolsaChart"></div>
-			</div>
-        </article>
-
-        <article class="panel" id="extjs">
-		    <div id="extJS-example" class="cssextJSExample">
-			<div class="cssMainTitle" title="Utilizamos el Framework ExtJs para realizar un ejemplo CRUD usando el almacenamiento local del navegador.  Using Frameword ExtJs and local storage to do a CRUD demo">Ejemplo con Framework ExtJS  (+info)</div>
-        
-			</div>
-        </article>
-
-        <article class="panel" id="calendarExample">
-            <div class='cssMainCalendarDiv'>
-				<div class="cssMainTitle" title="Utilizamos el control fullCalendar para mostrar un ejemplo de agenda.  Using the fullCalendar control to show an agenda Demo">Calendar/Calendario  (+info)</div>
-        
-				<div class='cssCalendarDiv'>
-					<div id='external-events'>
-						<h4>Proyectos/Projects</h4>
-						<div class='external-event'><span>Event 1</span>
-							<div class="explain-event">
-								A description of the event
-								Esta descripcion es totalmente actualizable
-							</div>
-						</div>
-						<div class='external-event'><span>Event 2</span>
-							<div class="explain-event">
-								A description of the event
-								Esta descripcion es totalmente actualizable
-							</div>
-						</div>
-						<div class='external-event'><span>Event 3</span>
-							<div class="explain-event">
-								A description of the event
-								Esta descripcion es totalmente actualizable
-							</div>
-						</div>
-						<div class='external-event'><span>Event 4</span>
-							<div class="explain-event">
-								A description of the event
-								Esta descripcion es totalmente actualizable
-							</div>
-						</div>
-						<div class='external-event'><span>Event 5</span>
-							<div class="explain-event">
-								A description of the event
-								Esta descripcion es totalmente actualizable
-							</div>
-						</div>
-						<p>
-						<input type='checkbox' id='filldates' /> <label for='filldates' title='Si selecciona esta casilla se ajustan las entradas a 8 horas. If you select this option the entries will be fixed to 8 hours'>Adjust to 8 hours</label>
-						</p>
-					</div>
-					<div id='calendar'></div>
-				</div>
-			</div>
-        </article>
-    </section>
-	</body>
-</html>
+/* End of the java html code */
