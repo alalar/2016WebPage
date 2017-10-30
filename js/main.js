@@ -75,11 +75,12 @@ function showWelcomeMessages(lstMessages) {
 		   $( ".cssAboutMe1" ).slideUp( "slow", function () {$( ".cssAboutMe" ).slideDown()});
 		});
 		$("#hyperLang").click(function () {
-			createCookie("userLanguage",language,100);
+			
 			if (language=="EN")
 				language="SP"
 			else
 				language="EN";
+			createCookie("userLanguage",language,100);
 			translatePageTo(language);
 		});
 		$(".cssSplashWindow").hide();
